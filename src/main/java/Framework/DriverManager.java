@@ -1,5 +1,6 @@
 package Framework;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
@@ -15,10 +16,10 @@ public class DriverManager {
     private static DriverManager instance;
     private static WebDriver driver;
     private static WebDriverWait wait;
-
+    private static String rootUrl;
 
     protected DriverManager(){
-
+        rootUrl = "https://evernote.com";
     }
 
     public static DriverManager getInstance()
@@ -28,10 +29,12 @@ public class DriverManager {
             instance = new DriverManager();
             if(driver == null)
             {
-                driver = new FirefoxDriver();
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
+                //driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
-                driver.navigate().to("https://evernote.com");
+                //driver.get(rootUrl);
             }
             if(wait == null)
             {
@@ -48,6 +51,19 @@ public class DriverManager {
 
     public WebDriver getWebDriver() {
         return driver;
+    }
+    public void goToRoot()
+    {
+        driver.get(rootUrl);
+    }
+    public void close()
+    {
+        driver.close();
+        driver = null;
+    }
+    public String getRootUrl()
+    {
+        return rootUrl;
     }
 
 

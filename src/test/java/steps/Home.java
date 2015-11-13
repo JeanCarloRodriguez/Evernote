@@ -4,8 +4,6 @@ import Framework.DriverManager;
 import cucumber.api.java.en.Given;
 import ui.pages.HomePage;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created with IntelliJ IDEA.
  * User: jeancarlorodriguez
@@ -14,11 +12,22 @@ import java.util.concurrent.TimeUnit;
  * To change this template use File | Settings | File Templates.
  */
 public class Home {
+    HomePage homePage;
+
+    public Home()
+    {
+        homePage = new HomePage();
+    }
+
+    @Given("^I am in the root Page$")
+    public void IAmInTheRootPage()
+    {
+        DriverManager.getInstance().goToRoot();
+    }
 
     @Given("^I Go to the log in Page$")
     public void goToLoginPage()
     {
-        HomePage homePage = new HomePage();
         homePage.goToLoginPage();
     }
 }

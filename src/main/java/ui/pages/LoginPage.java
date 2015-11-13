@@ -27,8 +27,9 @@ public class LoginPage extends BasePageObject {
     @FindBy(id = "login")
     WebElement signInButton;
 
+    @FindBy(xpath = "//div[contains(@id,'assword-wrapper')]//div[contains(@class,'error-status FieldState-message FieldState_error-message')]")
+    WebElement errorStatusField;
     public LoginPage() {
-        PageFactory.initElements(driver, this);
         waitUntilPageObjectIsLoaded();
     }
 
@@ -37,27 +38,41 @@ public class LoginPage extends BasePageObject {
         wait.until(ExpectedConditions.visibilityOf(signInButton));
     }
 
-    private LoginPage setUserNameInput(String userName) {
+    private void setUserNameInput(String userName) {
         userNameInput.clear();
         userNameInput.sendKeys(userName);
-        return this;
     }
 
-    private LoginPage setPasswordInput(String password) {
+    private void setPasswordInput(String password) {
         passwordInput.clear();
         passwordInput.sendKeys(password);
-        return this;
     }
 
     private void clickSignInButton() {
         signInButton.click();
     }
 
-    public MainPage login(String userName, String password) {
-        setUserNameInput(userName);
-        setPasswordInput(password);
+    public MainPage loginSuccessful(String userName, String password) {
+        setFields(userName,password);
         clickSignInButton();
         return new MainPage();
+    }
+    public void setFields(String userName,String password)
+    {
+        setUserNameInput(userName);
+        setPasswordInput(password);
+    }
+
+    public LoginPage loginFailed(String userName,String password)
+    {
+        setFields(userName,password);
+        clickSignInButton();
+
+        return this;
+    }
+    public String getErrorMessage()
+    {
+        return errorStatusField.getText();
     }
     /*
     public MainPage loginSuccessful(String userName, String password) {

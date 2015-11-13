@@ -2,8 +2,10 @@
 Feature: Notes
   Description: notes feature(create, modify, send to trash, delete from trash, share)
 Background:
-  Given I Go to the Evernote Page
-    And I Login into the web page with the email "test212223@gmail.com" and the password "Clave123"
+  Given I am in the root Page
+    And I Go to the log in Page
+    And I Login into the web page with a correct email "alejandrojeancarlo@gmail.com" and the password "motifxf7"
+
 
 Scenario: a note should be showed at the begin of the list when is created in a noteBook with 2 other notes
 Given I have a noteBook called "Automation tasks"
@@ -50,7 +52,5 @@ Given I create the notebooks: To do, Done.
   And I create a note in the notebook called "To do"
 When I move the note to the notebook "Done"
   Then the note should be in the notebook "Done"
-
-Scenario:
 
 

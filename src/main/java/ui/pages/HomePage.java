@@ -1,13 +1,9 @@
 package ui.pages;
 
-import Framework.DriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.BasePageObject;
 
 /**
@@ -26,10 +22,7 @@ public class HomePage extends BasePageObject {
     WebElement signInButton;
 
     public HomePage(){
-        //driver = DriverManager.getInstance().getWebDriver();
-        //wait = DriverManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-        waitUntilPageObjectIsLoaded();
+        //waitUntilPageObjectIsLoaded();
     }
 
     public LoginPage goToLoginPage()
@@ -40,6 +33,6 @@ public class HomePage extends BasePageObject {
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(signInButton));
+        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
     }
 }
