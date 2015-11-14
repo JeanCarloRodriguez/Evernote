@@ -12,21 +12,25 @@ import ui.BasePageObject;
  * Time: 4:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class newNotebookPage extends BasePageObject {
+public class NewNotebookPage extends BasePageObject {
 
     @FindBy(id = "gwt-debug-CreateNotebookDialog-centeredTextBox-textBox")
-    WebElement newNotebookTitle;
+    WebElement notebookTitleField;
 
     @FindBy(xpath = "//span[@id='gwt-debug-CreateNotebookDialog-confirm'][@class='GLATSGFCGF GLATSGFCHF GLATSGFCDD']")
     WebElement createNotebookButton;
 
+    public NewNotebookPage()
+    {
+        waitUntilPageObjectIsLoaded();
+    }
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(newNotebookTitle));
+        wait.until(ExpectedConditions.visibilityOf(notebookTitleField));
     }
 
     public NotebookPage createANotebook(String name) {
-        newNotebookTitle.sendKeys(name);
+        notebookTitleField.sendKeys(name);
         wait.until(ExpectedConditions.visibilityOf(createNotebookButton));
         createNotebookButton.click();
         return new NotebookPage();

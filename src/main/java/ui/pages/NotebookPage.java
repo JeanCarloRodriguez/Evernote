@@ -17,10 +17,16 @@ public class NotebookPage extends BasePageObject {
     @FindBy(id = "gwt-debug-NotebookHeader-name")
     WebElement notebookTitle;
 
+    @FindBy(xpath = "//span[@class='gwt-InlineLabel']")
+    WebElement errorMessageText;
+
+    public NotebookPage()
+    {
+        waitUntilPageObjectIsLoaded();
+    }
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(notebookTitle));
-        System.out.println("title for the notebook found!!!!!!!!!");
     }
 
     public String getNotebookTitle()
@@ -28,4 +34,6 @@ public class NotebookPage extends BasePageObject {
         System.out.println("the name of the new notebook is: "+notebookTitle.getText());
         return notebookTitle.getText();
     }
+
+
 }

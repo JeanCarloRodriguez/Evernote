@@ -1,7 +1,11 @@
 package steps;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
+import ui.PageTransporter;
+import ui.pages.DeleteNotebookConfirmationPage;
 import ui.pages.LeftMenuPage;
 import ui.pages.MainPage;
 import ui.pages.NotebookPage;
@@ -22,15 +26,56 @@ public class Notebook {
         //leftMenuPage = new LeftMenuPage();
     }
 
-    @Given("I have a noteBook called \"([^\\\"]*)\"")
-    public void IHaveANoteBook(String name)
+    @Given("I create a noteBook called \"([^\\\"]*)\"")
+    public void ICreateANoteBook(String name)
     {
+        //Todo
+        //make a method to now if a notebook is already exist
+        //if()
         leftMenuPage = mainPage.getLeftMenu();
-        notebookPage = leftMenuPage.goToNotebookPage()
+        notebookPage = leftMenuPage.goToNotebooksPage()
                 .goToNewNoteBookPage()
                 .createANotebook(name);
-        System.out.println("the name of the notebook: "+notebookPage.getNotebookTitle());
-        Assert.assertEquals(name,notebookPage.getNotebookTitle());
-        System.out.println("work until here");
+
+    }
+
+    @Then("A notebook called \"([^\\\"]*)\" is created")
+    public void ANotebookIsCreated(String notebookName)
+    {
+        System.out.println("the name of the notebook: " + notebookPage.getNotebookTitle());
+        Assert.assertEquals(notebookName, notebookPage.getNotebookTitle());
+    }
+
+    @When("^I delete a notebook called \"([^\\\"]*)\"$")
+    public void IDeleteANotebook(String notebookName)
+    {
+        leftMenuPage = mainPage.getLeftMenu();
+        DeleteNotebookConfirmationPage confirmationPage = leftMenuPage.goToNotebooksPage()
+                .deleteANotebookCalled(notebookName);
+        System.out.println("Message of delete confirmation "+confirmationPage.getMessageOfDeleteConfirmation());
+        confirmationPage.delete();
+    }
+
+    @Then("^the notebook \"([^\\\"]*)\" is not present in the list of notebooks$")
+    public void theNoteBookIsNotPresent(String notebookName)
+    {
+        mainPage =PageTransporter.getInstance().goToMain();
+        boolean actualResults= mainPage.getLeftMenu()
+                .goToNotebooksPage()
+                .isNotebookExist(notebookName);
+        boolean expectedResult = false;
+
+        Assert.assertEquals(actualResults,expectedResult);
+
+    }
+
+    @Then("^a message error \"([^\\\"]*)\" is displayed at try to created a duplicate notebook name$")
+    public void AMessageIsDisplayedAtTryToCreateANotebookWithTheSameName(String message)
+    {
+        String actualResult = mainPage.getErrorMessage();
+        String expectedResult = message;
+
+        Assert.assertEquals(actualResult,expectedResult);
+
     }
 }

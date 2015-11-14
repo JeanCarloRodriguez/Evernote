@@ -1,9 +1,13 @@
 package ui;
 
 import Framework.DriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.openqa.selenium.NoSuchElementException;
 
 /**
  * Base object used for pages and components
@@ -23,4 +27,26 @@ public abstract class BasePageObject {
     }
 
     public abstract void waitUntilPageObjectIsLoaded();
+
+    public boolean isPresent(WebElement element)
+    {
+        if(element==null)
+            return false;
+        else
+            return true;
+    }
+
+    public WebElement findElement(By by)
+    {
+        WebElement element;
+        try {
+            element = driver.findElement(by);
+            return element;
+        }catch (NoSuchElementException e)
+        {
+            return null;
+        }
+    }
+
+
 }

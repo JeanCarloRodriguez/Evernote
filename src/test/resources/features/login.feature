@@ -4,7 +4,7 @@ Feature: Login
 
   @loginSuccessful
   Scenario: login successful
-  Given I am in the root Page
+  Given I go to the root Page
   And I Go to the log in Page
   When I Login into the web page with a correct email "alejandrojeancarlo@gmail.com" and the password "motifxf7"
   Then I am in the main page
@@ -13,7 +13,7 @@ Feature: Login
 
   @loginFailed
   Scenario Outline: Login Unsuccessful
-   Given I am in the root Page
+   Given I go to the root Page
    And I Go to the log in Page
    When I Login into the web page with a wrong email "<email>" and the password "<password>"
    Then a message error "<errorMessage>" is displayed for the login failed

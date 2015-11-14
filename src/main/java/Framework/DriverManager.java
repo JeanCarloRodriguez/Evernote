@@ -16,10 +16,10 @@ public class DriverManager {
     private static DriverManager instance;
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private static String rootUrl;
+
 
     protected DriverManager(){
-        rootUrl = "https://evernote.com";
+
     }
 
     public static DriverManager getInstance()
@@ -52,19 +52,10 @@ public class DriverManager {
     public WebDriver getWebDriver() {
         return driver;
     }
-    public void goToRoot()
-    {
-        driver.get(rootUrl);
-    }
+
     public void close()
     {
         driver.close();
         driver = null;
     }
-    public String getRootUrl()
-    {
-        return rootUrl;
-    }
-
-
 }

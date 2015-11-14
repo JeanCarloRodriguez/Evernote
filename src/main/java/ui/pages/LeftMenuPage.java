@@ -14,6 +14,8 @@ import ui.common.CommonMethods;
  * To change this template use File | Settings | File Templates.
  */
 public class LeftMenuPage extends BasePageObject {
+    @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[2]/div[1]")
+    WebElement newNoteButton;
 
     @FindBy(xpath = "//div//img[@class='GLATSGFCDQ']")
     WebElement accountButton;
@@ -47,7 +49,7 @@ public class LeftMenuPage extends BasePageObject {
         CommonMethods.elementHighlight(accountButton);
     }
 
-    public NotebooksPage goToNotebookPage()
+    public NotebooksPage goToNotebooksPage()
     {
         wait.until(ExpectedConditions.elementToBeClickable(notebookButton));
         notebookButton.click();
@@ -65,5 +67,10 @@ public class LeftMenuPage extends BasePageObject {
         wait.until(ExpectedConditions.visibilityOf(accountMenu));
         logOutButton.click();
         return new LogOutPage();
+    }
+
+    public NewNotePage goToNewNotePage() {
+        newNoteButton.click();
+        return new NewNotePage();
     }
 }

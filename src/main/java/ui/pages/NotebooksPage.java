@@ -1,5 +1,6 @@
 package ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,35 +22,41 @@ public class NotebooksPage extends BasePageObject {
     @FindBy(xpath = "//div[@id='gwt-debug-NotebooksDrawer-createNotebookButton']")
     WebElement newNotebookButton;
 
-    @FindBy(xpath = "//div[contains(@id,'gwt-debug-NotebooksDrawer-title')]")
-    WebElement notebookTitle;
-
     @FindBy(xpath = "//div[contains(@class,'GLATSGFCCSB GLATSGFCGTB qa-notebookWidget qa-trash')]")
     WebElement trashButton;
+
+
+    public NotebooksPage()
+    {
+        waitUntilPageObjectIsLoaded();
+    }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(slidingPanel));
-        CommonMethods.sleep(10000);
         CommonMethods.elementHighlight(slidingPanel);
     }
 
-    public newNotebookPage goToNewNoteBookPage()
+    public NewNotebookPage goToNewNoteBookPage()
     {
         wait.until(ExpectedConditions.elementToBeClickable(newNotebookButton));
-        /*if (newNotebookButton.isEnabled())
-        {
-            newNotebookButton.click();
-        }else
-        {
-            wait.until(ExpectedConditions.elementToBeClickable(newNotebookButton));
-            newNotebookButton.click();
-        }*/
         newNotebookButton.click();
-        newNotebookButton.click();
-
-        return new newNotebookPage();
+        return new NewNotebookPage();
     }
 
 
+    public DeleteNotebookConfirmationPage deleteANotebookCalled(String notebookName) {
+
+        WebElement deleteNotebookButton = driver.findElement(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]//following-sibling::div//div[contains(@class,'qa-deleteButton')]"));
+        deleteNotebookButton.click();
+        return new DeleteNotebookConfirmationPage();
+
+    }
+
+    public boolean isNotebookExist(String notebookName)
+    {
+        WebElement notebook = findElement(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]"));
+        return isPresent(notebook);
+
+    }
 }

@@ -2,6 +2,7 @@ package steps;
 
 import Framework.DriverManager;
 import cucumber.api.java.en.Given;
+import ui.PageTransporter;
 import ui.pages.HomePage;
 
 /**
@@ -19,10 +20,10 @@ public class Home {
         homePage = new HomePage();
     }
 
-    @Given("^I am in the root Page$")
+    @Given("^I go to the root Page$")
     public void IAmInTheRootPage()
     {
-        DriverManager.getInstance().goToRoot();
+        PageTransporter.getInstance().goToRoot();
     }
 
     @Given("^I Go to the log in Page$")

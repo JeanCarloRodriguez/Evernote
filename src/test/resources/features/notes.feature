@@ -2,13 +2,13 @@
 Feature: Notes
   Description: notes feature(create, modify, send to trash, delete from trash, share)
 Background:
-  Given I am in the root Page
+  Given I go to the root Page
     And I Go to the log in Page
     And I Login into the web page with a correct email "alejandrojeancarlo@gmail.com" and the password "motifxf7"
 
 
 Scenario: a note should be showed at the begin of the list when is created in a noteBook with 2 other notes
-Given I have a noteBook called "Automation tasks"
+Given I create a noteBook called "Automation tasks"
   And the noteBook haves 2 notes called "first note", "second note"
 When I create a new note   Called "Last Note"
   And I sort the notes by "Date Created(newest first)"
