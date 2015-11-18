@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +23,9 @@ public class MainPage extends BasePageObject {
 
     @FindBy(id = "gwt-debug-sidebar")
     WebElement sideBar;
+
+    @FindBy(id = "gwt-debug-AccountMenuPopup-root")
+    WebElement accountMenuPopup;
 
     private boolean isLoaded;
     public MainPage(){
@@ -50,5 +54,16 @@ public class MainPage extends BasePageObject {
     {
         WebElement errorMessageText = driver.findElement(By.xpath("//span[@class='gwt-InlineLabel']"));
         return errorMessageText.getText();
+    }
+    public LogOutPage logOut()
+    {
+        leftMenuPage.clickOnAccountMenuButton();
+        try {
+            accountMenuPopup.isDisplayed();
+        }
+        catch (NoSuchElementException e){
+            leftMenuPage.clickOnAccountMenuButton();
+        }
+        return leftMenuPage.logOut();
     }
 }

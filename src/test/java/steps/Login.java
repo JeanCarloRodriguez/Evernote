@@ -1,19 +1,15 @@
 package steps;
-import Framework.DriverManager;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import ui.PageTransporter;
 import ui.common.CommonMethods;
-import ui.pages.HomePage;
 import ui.pages.LogOutPage;
 import ui.pages.LoginPage;
 import ui.pages.MainPage;
 import org.testng.Assert;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +22,7 @@ public class Login {
     MainPage mainPage;
     LoginPage loginPage;
     LogOutPage logOutPage;
+    String userEmail;
     private PageTransporter pageTransporter = PageTransporter.getInstance();
 
     @Given("^I Login into the web page with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
@@ -33,6 +30,7 @@ public class Login {
     {
         loginPage = new LoginPage();
         mainPage = loginPage.loginSuccessful(user,password);
+        userEmail = user;
     }
 
     @Then("^I am in the main page$")
@@ -41,6 +39,14 @@ public class Login {
         boolean actualPageLoaded = mainPage.getIsLoaded();
         boolean expectedPageLoaded = true;
         Assert.assertEquals(actualPageLoaded,expectedPageLoaded);
+    }
+
+    @And("^Im login with the correct user$")
+    public void imLoginWithTheCorrectUser(){
+        String emailAccount = mainPage.getLeftMenu().getEmailAccount();
+        String actualResult = emailAccount;
+        String expectedResult = userEmail.toUpperCase();
+        Assert.assertEquals(actualResult,expectedResult);
     }
 
     @Given("^I Login into the web page with a wrong email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
@@ -62,8 +68,7 @@ public class Login {
     @When("^I log out$")
     public void iLogOut()
     {
-        logOutPage =mainPage.getLeftMenu()
-                .logOut();
+        logOutPage =mainPage.logOut();
     }
     @Then("^a message is displayed confirming the log out$")
     public void aMessageIsDisplayedConfirmingTheLogOut()
@@ -91,6 +96,15 @@ public class Login {
     public void iGoToTheMainPage()
     {
         pageTransporter.goToMain();
+    }
+
+    @After("@loginSuccessful")
+    public void afterLoginSuccessful()
+    {
+        if(CommonMethods.theAccountIsLogin())
+        {
+            mainPage.logOut();
+        }
     }
 
     /*Todo apply after all

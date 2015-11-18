@@ -15,7 +15,7 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
     public void afterExecution() {
 
         try {
-            //log out
+            DriverManager.getInstance().close();
         } catch (Exception e) {
 //            log.error("Unable to logout after execution", e);
         } finally {

@@ -34,8 +34,8 @@ public class NotesPage extends BasePageObject {
 
     public DeleteNoteConfirmationPage deleteNote(String noteName)
     {
-        WebElement notebook = driver.findElement(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']//parent::div//following-sibling::div//div[contains(@class,'qa-deleteButton')]"));
-        notebook.click();
+        WebElement deleteNoteButton = driver.findElement(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']//parent::div//following-sibling::div//div[contains(@class,'qa-deleteButton')]"));
+        deleteNoteButton.click();
         return new DeleteNoteConfirmationPage();
     }
 

@@ -1,5 +1,6 @@
 package ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,33 +15,27 @@ import ui.common.CommonMethods;
  * To change this template use File | Settings | File Templates.
  */
 public class LeftMenuPage extends BasePageObject {
-    @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[2]/div[1]")
-    //@FindBy(xpath = "//div[@id='gwt-debug-sidebar']//span[text()='New note']")
+    @FindBy(id = "gwt-debug-Sidebar-newNoteButton-container")
     WebElement newNoteButton;
 
     @FindBy(xpath = "//div//img[@class='GLATSGFCDQ'][contains(@src,'/shard/')]")
-    WebElement accountButton;
+    WebElement accountMenuButton;
 
-    @FindBy(id = "gwt-debug-AccountMenuPopup-root")
-    WebElement accountMenu;
-
-    @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[3]/div[3]")
-    //@FindBy(xpath = "//div[@id='gwt-debug-sidebar']//span[text()='Notebooks']")
+    @FindBy(id = "gwt-debug-Sidebar-notebooksButton-container")
     WebElement notebooksButton;
 
-    @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[3]/div[2]")
+    @FindBy(id = "gwt-debug-Sidebar-notesButton-container")
     WebElement notesButton;
 
-    @FindBy(xpath = "//div[contains(text(),'Log out')]")
-    WebElement logOutButton;
+
     public LeftMenuPage()
     {
         waitUntilPageObjectIsLoaded();
     }
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(accountButton));
-        CommonMethods.elementHighlight(accountButton);
+        wait.until(ExpectedConditions.visibilityOf(accountMenuButton));
+        CommonMethods.elementHighlight(accountMenuButton);
     }
 
     public NotebooksPage goToNotebooksPage()
@@ -57,15 +52,26 @@ public class LeftMenuPage extends BasePageObject {
 
     public LogOutPage logOut()
     {
-        accountButton.click();
-        wait.until(ExpectedConditions.visibilityOf(accountMenu));
-        logOutButton.click();
-        return new LogOutPage();
+        AccountMenuPage accountMenuPage = new AccountMenuPage();
+        return accountMenuPage.logOut();
     }
 
     public NewNotePage goToNewNotePage() {
         wait.until(ExpectedConditions.visibilityOf(newNoteButton));
         newNoteButton.click();
         return new NewNotePage();
+    }
+
+    public String getEmailAccount() {
+        //Open the accountMenuPage
+        accountMenuButton.click();
+        AccountMenuPage accountMenuPage = new AccountMenuPage();
+        //Close the accountMenuPAge
+        accountMenuButton.click();
+        return accountMenuPage.getEmailAccount();
+    }
+    public void clickOnAccountMenuButton()
+    {
+        accountMenuButton.click();
     }
 }

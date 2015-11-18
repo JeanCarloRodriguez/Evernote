@@ -1,6 +1,5 @@
 package steps;
 
-import Framework.DriverManager;
 import cucumber.api.java.en.Given;
 import ui.PageTransporter;
 import ui.pages.HomePage;
