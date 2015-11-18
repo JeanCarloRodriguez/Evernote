@@ -29,16 +29,16 @@ public class DriverManager {
             instance = new DriverManager();
             if(driver == null)
             {
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-                driver = new ChromeDriver();
-                //driver = new FirefoxDriver();
+                //System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                //driver = new ChromeDriver();
+                driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
-                //driver.get(rootUrl);
+                driver.get("https://www.evernote.com/");
             }
             if(wait == null)
             {
-                wait = new WebDriverWait(driver,10);
+                wait = new WebDriverWait(driver,15);
             }
 
         }

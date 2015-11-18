@@ -51,7 +51,7 @@ public class NewNotePage extends BasePageObject{
         {
             wait.until(ExpectedConditions.elementToBeClickable(notebookSelectMenu));
             notebookSelectMenu.click();
-            WebElement selectedNotebook = findElement(By.xpath("//div[@id='gwt-debug-notebookSelectMenu-slidingPanel']//div[text()='"+noteBookName+"']"));
+            WebElement selectedNotebook = driver.findElement(By.xpath("//div[@id='gwt-debug-notebookSelectMenu-slidingPanel']//div[text()='"+noteBookName+"']"));
             selectedNotebook.click();
         }
     }

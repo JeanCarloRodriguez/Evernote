@@ -20,28 +20,26 @@ public class MainPage extends BasePageObject {
     @FindBy(id = "gwt-debug-NoteTitleView-textBox")
     WebElement noteTitleTextBox;
 
+    @FindBy(id = "gwt-debug-sidebar")
+    WebElement sideBar;
+
     private boolean isLoaded;
     public MainPage(){
-        leftMenuPage = new LeftMenuPage();
         waitUntilPageObjectIsLoaded();
+        leftMenuPage = new LeftMenuPage();
     }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
 
-        //wait.until(ExpectedConditions.visibilityOf(noteTitleTextBox));
-        setIsLoaded(true);
-        //CommonMethods.elementHighlight(noteTitleTextBox);
+        wait.until(ExpectedConditions.visibilityOf(sideBar));
+        isLoaded = true;
+        CommonMethods.elementHighlight(sideBar);
     }
 
     public boolean getIsLoaded()
     {
         return isLoaded;
-    }
-
-    public void setIsLoaded(boolean loaded)
-    {
-        isLoaded = loaded;
     }
 
     public LeftMenuPage getLeftMenu() {
@@ -50,7 +48,7 @@ public class MainPage extends BasePageObject {
     //apparently this label is a generic one for all situations
     public String getErrorMessage()
     {
-        WebElement errorMessageText = findElement(By.xpath("//span[@class='gwt-InlineLabel']"));
+        WebElement errorMessageText = driver.findElement(By.xpath("//span[@class='gwt-InlineLabel']"));
         return errorMessageText.getText();
     }
 }

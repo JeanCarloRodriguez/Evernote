@@ -1,5 +1,6 @@
 package ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,6 +34,10 @@ public class NotebookPage extends BasePageObject {
     {
         System.out.println("the name of the new notebook is: "+notebookTitle.getText());
         return notebookTitle.getText();
+    }
+    public boolean isNoteExist(String notebookName)
+    {
+        return isPresent(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+notebookName+"']"));
     }
 
 

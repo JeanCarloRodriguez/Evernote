@@ -3,13 +3,14 @@ Feature: Login
   Description: scenarios for login
 
   @loginSuccessful
-  Scenario: login successful
+  Scenario: login successful and log out
   Given I go to the root Page
   And I Go to the log in Page
   When I Login into the web page with a correct email "alejandrojeancarlo@gmail.com" and the password "motifxf7"
   Then I am in the main page
   When I log out
   Then a message is displayed confirming the log out
+
 
   @loginFailed
   Scenario Outline: Login Unsuccessful

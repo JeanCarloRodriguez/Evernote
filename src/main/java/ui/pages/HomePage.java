@@ -22,7 +22,7 @@ public class HomePage extends BasePageObject {
     WebElement signInButton;
 
     public HomePage(){
-        //waitUntilPageObjectIsLoaded();
+        waitUntilPageObjectIsLoaded();
     }
 
     public LoginPage goToLoginPage()

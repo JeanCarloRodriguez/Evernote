@@ -4,6 +4,7 @@ import Framework.DriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ui.PageTransporter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,6 @@ import org.openqa.selenium.WebElement;
  * To change this template use File | Settings | File Templates.
  */
 public class CommonMethods {
-
 
     public static void elementHighlight(WebElement element) {
         WebDriver driver = DriverManager.getInstance().getWebDriver();
@@ -27,13 +27,14 @@ public class CommonMethods {
                     element, "");
         }
     }
-
-    public static void sleep(int time)
+    public static boolean theAccountIsLogin()
     {
-        try {
-            Thread.sleep(time);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        PageTransporter pageTransporter = new PageTransporter();
+        WebDriver driver = DriverManager.getInstance().getWebDriver();
+        pageTransporter.goToLogin();
+        if(driver.getCurrentUrl().contains("login=true"))
+            return true;
+        else
+            return false;
     }
 }

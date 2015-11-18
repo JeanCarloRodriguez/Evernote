@@ -15,12 +15,14 @@ public class PageTransporter {
     private WebDriver driver = DriverManager.getInstance().getWebDriver();
     private static String rootUrl;
     private static String mainUrl;
+    private static String loginUrl;
     private static PageTransporter instance;
 
     public PageTransporter()
     {
         rootUrl = "https://evernote.com";
         mainUrl = "https://www.evernote.com/Home.action";
+        loginUrl = "https://www.evernote.com/Login.action";
     }
 
     public static PageTransporter getInstance()
@@ -37,9 +39,20 @@ public class PageTransporter {
     {
         driver.get(rootUrl);
     }
-    public MainPage goToMain()
+    public void goToMain()
     {
         driver.get(mainUrl);
-        return new MainPage();
+    }
+    public void goToLogin()
+    {
+        driver.get(loginUrl);
+    }
+    public String getMainUrl()
+    {
+        return mainUrl;
+    }
+    public String getCurrentUrl()
+    {
+        return driver.getCurrentUrl();
     }
 }

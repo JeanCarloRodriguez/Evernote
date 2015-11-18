@@ -28,23 +28,14 @@ public abstract class BasePageObject {
 
     public abstract void waitUntilPageObjectIsLoaded();
 
-    public boolean isPresent(WebElement element)
+    public boolean isPresent(By by)
     {
-        if(element==null)
-            return false;
-        else
-            return true;
-    }
-
-    public WebElement findElement(By by)
-    {
-        WebElement element;
         try {
-            element = driver.findElement(by);
-            return element;
+            driver.findElement(by);
+            return true;
         }catch (NoSuchElementException e)
         {
-            return null;
+            return false;
         }
     }
 

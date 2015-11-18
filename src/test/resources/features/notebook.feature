@@ -1,20 +1,25 @@
 @notebook
 Feature: Notebook
   Description: Scenarios for notebook
+
 Background:
-  Given I go to the root Page
-    And I Go to the log in Page
-    And I Login into the web page with a correct email "testautomated91@gmail.com" and the password "Client123"
+ Given I log in with the user "testautomated91@gmail.com" and the password "Client123"
 
-Scenario: I can create a notebook and after delete this notebook
-  When I create a noteBook called "My notebook"
-  Then A notebook called "My notebook" is created
-  When I delete a notebook called "My notebook"
-  Then the notebook "My notebook" is not present in the list of notebooks
+@createNotebook
+Scenario: I can create a notebook
+  When I create a noteBook called "My notebook1"
+  Then A notebook called "My notebook1" is created
 
-Scenario: At create two notebook with the same name a message is displayed
+Scenario: I can delete a notebook
+  #Given I go to the main Page
+  Given I create a noteBook called "My notebook2"
+  When I delete a notebook called "My notebook2"
+  Then the notebook "My notebook2" is not present in the list of notebooks
+
+@createNotebook
+@lastScenarioOfFeature
+Scenario: At try to create two notebook with the same name a message is displayed
+ # Given I go to the main Page
   Given I create a noteBook called "Todo"
   When I create a noteBook called "Todo"
   Then a message error "The notebook title entered already exists. Please choose another title." is displayed at try to created a duplicate notebook name
-    And I delete a notebook called "Todo"
-

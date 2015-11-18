@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,45 +22,44 @@ public class Notebook {
     MainPage mainPage;
     LeftMenuPage leftMenuPage;
     NotebookPage notebookPage;
+    String name;
     public Notebook(){
         mainPage = new MainPage();
         //leftMenuPage = new LeftMenuPage();
     }
 
     @Given("I create a noteBook called \"([^\\\"]*)\"")
-    public void ICreateANoteBook(String name)
+    public void ICreateANoteBook(String noteName)
     {
         //Todo
         //make a method to now if a notebook is already exist
         //if()
-        leftMenuPage = mainPage.getLeftMenu();
-        notebookPage = leftMenuPage.goToNotebooksPage()
+        notebookPage = mainPage.getLeftMenu().goToNotebooksPage()
                 .goToNewNoteBookPage()
-                .createANotebook(name);
-
+                .createANotebook(noteName);
+        name = noteName;
     }
 
     @Then("A notebook called \"([^\\\"]*)\" is created")
     public void ANotebookIsCreated(String notebookName)
     {
-        System.out.println("the name of the notebook: " + notebookPage.getNotebookTitle());
-        Assert.assertEquals(notebookName, notebookPage.getNotebookTitle());
+        String actualResult =  notebookPage.getNotebookTitle();
+        String expectedResult = notebookName;
+        Assert.assertEquals(actualResult,expectedResult);
     }
 
     @When("^I delete a notebook called \"([^\\\"]*)\"$")
-    public void IDeleteANotebook(String notebookName)
+    public void iDeleteANotebook(String notebookName)
     {
-        leftMenuPage = mainPage.getLeftMenu();
-        DeleteNotebookConfirmationPage confirmationPage = leftMenuPage.goToNotebooksPage()
+        DeleteNotebookConfirmationPage confirmationPage = mainPage.getLeftMenu().goToNotebooksPage()
                 .deleteANotebookCalled(notebookName);
-        System.out.println("Message of delete confirmation "+confirmationPage.getMessageOfDeleteConfirmation());
         confirmationPage.delete();
     }
 
     @Then("^the notebook \"([^\\\"]*)\" is not present in the list of notebooks$")
     public void theNoteBookIsNotPresent(String notebookName)
     {
-        mainPage =PageTransporter.getInstance().goToMain();
+        PageTransporter.getInstance().goToMain();
         boolean actualResults= mainPage.getLeftMenu()
                 .goToNotebooksPage()
                 .isNotebookExist(notebookName);
@@ -76,6 +76,14 @@ public class Notebook {
         String expectedResult = message;
 
         Assert.assertEquals(actualResult,expectedResult);
+    }
 
+    @After("@createNotebook")
+    public void afterCreateANotebook()
+    {
+        if(name!=null)
+            iDeleteANotebook(name);
+        else
+            System.out.println("there is no name to delete a notebook");
     }
 }

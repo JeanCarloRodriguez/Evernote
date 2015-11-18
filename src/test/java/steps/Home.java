@@ -14,16 +14,17 @@ import ui.pages.HomePage;
  */
 public class Home {
     HomePage homePage;
-
+    PageTransporter pageTransporter;
     public Home()
     {
-        homePage = new HomePage();
+        pageTransporter = new PageTransporter();
     }
 
     @Given("^I go to the root Page$")
-    public void IAmInTheRootPage()
+    public void iGoToTheRootPage()
     {
         PageTransporter.getInstance().goToRoot();
+        homePage = new HomePage();
     }
 
     @Given("^I Go to the log in Page$")

@@ -15,19 +15,21 @@ import ui.common.CommonMethods;
  */
 public class LeftMenuPage extends BasePageObject {
     @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[2]/div[1]")
+    //@FindBy(xpath = "//div[@id='gwt-debug-sidebar']//span[text()='New note']")
     WebElement newNoteButton;
 
-    @FindBy(xpath = "//div//img[@class='GLATSGFCDQ']")
+    @FindBy(xpath = "//div//img[@class='GLATSGFCDQ'][contains(@src,'/shard/')]")
     WebElement accountButton;
 
     @FindBy(id = "gwt-debug-AccountMenuPopup-root")
     WebElement accountMenu;
 
     @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[3]/div[3]")
-    WebElement notebookButton;
+    //@FindBy(xpath = "//div[@id='gwt-debug-sidebar']//span[text()='Notebooks']")
+    WebElement notebooksButton;
 
     @FindBy(xpath = "//div[@class='GLATSGFCF-B']/div[3]/div[2]")
-    WebElement noteButton;
+    WebElement notesButton;
 
     @FindBy(xpath = "//div[contains(text(),'Log out')]")
     WebElement logOutButton;
@@ -37,28 +39,20 @@ public class LeftMenuPage extends BasePageObject {
     }
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        System.out.println("from Left Menu: "+accountButton.getAttribute("src"));
         wait.until(ExpectedConditions.visibilityOf(accountButton));
-
-        while(!accountButton.getAttribute("src").contains("www.evernote.com"))
-        {
-            CommonMethods.sleep(500);
-            System.out.println("from while: "+accountButton.getAttribute("src").contains("www.evernote.com")+"    "+accountButton.getAttribute("src"));
-        }
-
         CommonMethods.elementHighlight(accountButton);
     }
 
     public NotebooksPage goToNotebooksPage()
     {
-        wait.until(ExpectedConditions.elementToBeClickable(notebookButton));
-        notebookButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(notebooksButton));
+        notebooksButton.click();
         return new NotebooksPage();
     }
-    public NotePage goToNoteButton()
+    public NotesPage goToNotesPage()
     {
-        noteButton.click();
-        return new NotePage();
+        notesButton.click();
+        return new NotesPage();
     }
 
     public LogOutPage logOut()
@@ -70,6 +64,7 @@ public class LeftMenuPage extends BasePageObject {
     }
 
     public NewNotePage goToNewNotePage() {
+        wait.until(ExpectedConditions.visibilityOf(newNoteButton));
         newNoteButton.click();
         return new NewNotePage();
     }

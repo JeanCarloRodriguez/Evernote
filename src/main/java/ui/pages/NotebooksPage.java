@@ -55,8 +55,6 @@ public class NotebooksPage extends BasePageObject {
 
     public boolean isNotebookExist(String notebookName)
     {
-        WebElement notebook = findElement(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]"));
-        return isPresent(notebook);
-
+        return isPresent(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]"));
     }
 }

@@ -5,10 +5,9 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import jdk.nashorn.internal.runtime.Context;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import ui.PageTransporter;
+import ui.common.CommonMethods;
+import ui.pages.HomePage;
 import ui.pages.LogOutPage;
 import ui.pages.LoginPage;
 import ui.pages.MainPage;
@@ -27,13 +26,13 @@ public class Login {
     MainPage mainPage;
     LoginPage loginPage;
     LogOutPage logOutPage;
-
+    private PageTransporter pageTransporter = PageTransporter.getInstance();
 
     @Given("^I Login into the web page with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
     public void loginIntoWebPageSuccess(String user, String password)
     {
-        LoginPage login = new LoginPage();
-        mainPage = login.loginSuccessful(user,password);
+        loginPage = new LoginPage();
+        mainPage = loginPage.loginSuccessful(user,password);
     }
 
     @Then("^I am in the main page$")
@@ -51,11 +50,7 @@ public class Login {
         String errorMessage = loginPage.loginFailed(user,password)
                 .getErrorMessage();
         System.out.println(errorMessage);
-
-
     }
-
-
 
     @Then("^a message error \"([^\\\"]*)\" is displayed for the login failed$")
     public void errorMessageFromLogin(String errorMessage)
@@ -76,19 +71,31 @@ public class Login {
         String actualResult = logOutPage.getLogOutMessage();
         String expectedResult = "You have successfully been logged out of Evernote.";
         Assert.assertEquals(actualResult,expectedResult);
-
     }
 
-    /*
+    @Given("I log in with the user \"([^\\\"]*)\" and the password \"([^\\\"]*)\"")
+    public void iLogInWithTheUserAndPassword(String user, String password)
+    {
+
+
+        if(!CommonMethods.theAccountIsLogin())
+        {
+            pageTransporter.goToLogin();
+            loginIntoWebPageSuccess(user, password);
+        }
+        else
+            System.out.println("Tee account :"+user+" is already log in");
+    }
+
+    @Given("^I go to the main Page$")
+    public void iGoToTheMainPage()
+    {
+        pageTransporter.goToMain();
+    }
+
+    /*Todo apply after all
     @After("@loginFailed")
     public void afterLoginFailed()
-    {
-        DriverManager.getInstance().goToRoot();
-        //DriverManager.getInstance().close();
-    }
-
-    @After("@login")
-    public void exitLogin()
     {
         DriverManager.getInstance().close();
     }*/
