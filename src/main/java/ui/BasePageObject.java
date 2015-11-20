@@ -3,10 +3,8 @@ package ui;
 import Framework.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import org.openqa.selenium.NoSuchElementException;
 
 /**
@@ -28,6 +26,10 @@ public abstract class BasePageObject {
 
     public abstract void waitUntilPageObjectIsLoaded();
 
+    /**
+     * the isPresent method returns true if the element By is present
+     * otherwise return false
+     */
     public boolean isPresent(By by)
     {
         try {
@@ -38,6 +40,4 @@ public abstract class BasePageObject {
             return false;
         }
     }
-
-
 }

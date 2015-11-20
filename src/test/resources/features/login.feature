@@ -2,7 +2,6 @@
 Feature: Login
   Description: scenarios for login
 
-  @loginSuccessful
   Scenario: login successful
   Given I go to the root Page
   And I Go to the log in Page
@@ -15,8 +14,6 @@ Feature: Login
   When I log out
   Then a message is displayed confirming the log out
 
-
-  @loginFailed
   Scenario Outline: Login Unsuccessful
    Given I go to the root Page
    And I Go to the log in Page

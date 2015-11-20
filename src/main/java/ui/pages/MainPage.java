@@ -58,12 +58,12 @@ public class MainPage extends BasePageObject {
     public LogOutPage logOut()
     {
         leftMenuPage.clickOnAccountMenuButton();
-        try {
+        /*try {
             accountMenuPopup.isDisplayed();
         }
         catch (NoSuchElementException e){
             leftMenuPage.clickOnAccountMenuButton();
-        }
+        }*/
         return leftMenuPage.logOut();
     }
 }

@@ -17,7 +17,7 @@ public class NewNotebookPage extends BasePageObject {
     @FindBy(id = "gwt-debug-CreateNotebookDialog-centeredTextBox-textBox")
     WebElement notebookTitleField;
 
-    @FindBy(xpath = "//span[@id='gwt-debug-CreateNotebookDialog-confirm'][@class='GLATSGFCGF GLATSGFCHF GLATSGFCDD']")
+    @FindBy(id = "gwt-debug-CreateNotebookDialog-confirm")
     WebElement createNotebookButton;
 
     public NewNotebookPage()
@@ -31,7 +31,7 @@ public class NewNotebookPage extends BasePageObject {
 
     public NotebookPage createANotebook(String name) {
         notebookTitleField.sendKeys(name);
-        wait.until(ExpectedConditions.visibilityOf(createNotebookButton));
+        wait.until(ExpectedConditions.elementToBeClickable(createNotebookButton));
         createNotebookButton.click();
         return new NotebookPage();
     }

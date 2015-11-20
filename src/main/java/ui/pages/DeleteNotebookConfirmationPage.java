@@ -6,11 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jeancarlorodriguez
+ * User: Jean Carlo Rodriguez
  * Date: 11/14/15
  * Time: 2:19 PM
- * To change this template use File | Settings | File Templates.
  */
 public class DeleteNotebookConfirmationPage extends BasePageObject {
     @FindBy(id = "gwt-debug-ConfirmationDialog-confirm")
@@ -29,12 +27,20 @@ public class DeleteNotebookConfirmationPage extends BasePageObject {
         wait.until(ExpectedConditions.visibilityOf(deleteButton));
     }
 
+    /**
+     * This method clicks in delete button to remove the notebook
+     * @return a instance of NotebooksPage
+     */
     public NotebooksPage delete()
     {
         deleteButton.click();
         return new NotebooksPage();
     }
 
+    /**
+     * this method return the confirmation message at delete a notebook
+     * @return a String with the message of confirmation
+     */
     public String getMessageOfDeleteConfirmation()
     {
         return confirmationMessage.getText();

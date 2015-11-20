@@ -1,7 +1,5 @@
 package steps;
 
-import Framework.DriverManager;
-import cucumber.api.java.After;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
@@ -47,7 +45,7 @@ public class Note {
     @When("^I delete the note \"([^\\\"]*)\"$")
     public void iDeleteANoteFromTheNoteList(String noteName)
     {
-        notesPage = mainPage.getLeftMenu().goToNotesPage().deleteNote(noteName).delete();
+        notesPage = mainPage.getLeftMenu().goToNotesPage().goToDeleteNoteConfirmationPage(noteName).delete();
         name = noteName;
     }
     @Then("^the note \"([^\\\"]*)\" is not displayed in the list of notes$")

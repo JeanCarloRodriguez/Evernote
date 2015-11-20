@@ -6,11 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jeancarlorodriguez
+ * User: Jean Carlo Rodriguez
  * Date: 11/16/15
  * Time: 2:53 PM
- * To change this template use File | Settings | File Templates.
  */
 public class DeleteNoteConfirmationPage extends BasePageObject {
 
@@ -29,12 +27,20 @@ public class DeleteNoteConfirmationPage extends BasePageObject {
         wait.until(ExpectedConditions.visibilityOf(deleteButton));
     }
 
+    /**
+     * This method clicks in delete button to remove the note
+     * @return a instance of NotePage
+     */
     public NotesPage delete()
     {
         deleteButton.click();
         return new NotesPage();
     }
 
+    /**
+     * this method return the confirmation message at delete a note
+     * @return a String with the message of confirmation
+     */
     public String getMessageOfDeleteConfirmation()
     {
         return confirmationMessage.getText();

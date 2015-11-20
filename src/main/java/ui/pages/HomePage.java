@@ -7,15 +7,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jeancarlorodriguez
+ * User: Jean Carlo Rodriguez
  * Date: 11/10/15
  * Time: 5:36 PM
- * To change this template use File | Settings | File Templates.
  */
 public class HomePage extends BasePageObject {
-    //private WebDriver driver;
-    //private WebDriverWait wait;
 
     @FindBy(xpath = "//form[contains(@id,'create-account') ]//a[@class='login-link click_tracking']")
     @CacheLookup
@@ -25,14 +21,18 @@ public class HomePage extends BasePageObject {
         waitUntilPageObjectIsLoaded();
     }
 
+    @Override
+    public void waitUntilPageObjectIsLoaded() {
+        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+    }
+
+    /**
+     * this method moves the page to the Login Page by clicking the sign in button
+     * @return an instance of LoginPage
+     */
     public LoginPage goToLoginPage()
     {
         signInButton.click();
         return new LoginPage();
-    }
-
-    @Override
-    public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
     }
 }

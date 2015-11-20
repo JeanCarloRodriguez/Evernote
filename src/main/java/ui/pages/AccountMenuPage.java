@@ -6,11 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jeancarlorodriguez
+ * User: Jean Carlo Rodriguez
  * Date: 11/18/15
  * Time: 10:26 AM
- * To change this template use File | Settings | File Templates.
  */
 public class AccountMenuPage extends BasePageObject {
 
@@ -32,11 +30,19 @@ public class AccountMenuPage extends BasePageObject {
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(accountMenuPopup));
     }
+
+    /**
+     * this method returns the email with that the user is logged in
+     */
     public String getEmailAccount()
     {
         return emailAccountLabel.getText();
     }
 
+    /**
+     * this method log out the user account
+     * @return a instance of the class LogOutPage
+     */
     public LogOutPage logOut() {
         logOutButton.click();
         return new LogOutPage();

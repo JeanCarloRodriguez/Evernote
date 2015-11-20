@@ -28,7 +28,7 @@ public class Notebook {
         //leftMenuPage = new LeftMenuPage();
     }
 
-    @Given("I create a noteBook called \"([^\\\"]*)\"")
+    @Given("I create a noteBook \"([^\\\"]*)\"")
     public void ICreateANoteBook(String noteName)
     {
         //Todo
@@ -40,7 +40,7 @@ public class Notebook {
         name = noteName;
     }
 
-    @Then("A notebook called \"([^\\\"]*)\" is created")
+    @Then("a notebook \"([^\\\"]*)\" is created")
     public void ANotebookIsCreated(String notebookName)
     {
         String actualResult =  notebookPage.getNotebookTitle();
@@ -48,7 +48,7 @@ public class Notebook {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @When("^I delete a notebook called \"([^\\\"]*)\"$")
+    @When("^I delete a notebook \"([^\\\"]*)\"$")
     public void iDeleteANotebook(String notebookName)
     {
         DeleteNotebookConfirmationPage confirmationPage = mainPage.getLeftMenu().goToNotebooksPage()

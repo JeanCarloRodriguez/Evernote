@@ -1,5 +1,5 @@
 package steps;
-import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -23,6 +23,10 @@ public class Login {
     LoginPage loginPage;
     LogOutPage logOutPage;
     String userEmail;
+    boolean loggedIn;
+    public Login(){
+        loggedIn = false;
+    }
     private PageTransporter pageTransporter = PageTransporter.getInstance();
 
     @Given("^I Login into the web page with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
@@ -31,6 +35,7 @@ public class Login {
         loginPage = new LoginPage();
         mainPage = loginPage.loginSuccessful(user,password);
         userEmail = user;
+        loggedIn = true;
     }
 
     @Then("^I am in the main page$")
@@ -69,6 +74,7 @@ public class Login {
     public void iLogOut()
     {
         logOutPage =mainPage.logOut();
+        loggedIn = false;
     }
     @Then("^a message is displayed confirming the log out$")
     public void aMessageIsDisplayedConfirmingTheLogOut()
@@ -88,8 +94,10 @@ public class Login {
             pageTransporter.goToLogin();
             loginIntoWebPageSuccess(user, password);
         }
-        else
-            System.out.println("Tee account :"+user+" is already log in");
+        else{
+            loggedIn = true;
+            System.out.println("The account :"+user+" is already log in");
+        }
     }
 
     @Given("^I go to the main Page$")
@@ -98,19 +106,13 @@ public class Login {
         pageTransporter.goToMain();
     }
 
-    @After("@loginSuccessful")
-    public void afterLoginSuccessful()
+    @Before("@Login")
+    public void verifyLogoutUser()
     {
-        if(CommonMethods.theAccountIsLogin())
+        if(loggedIn)
         {
-            mainPage.logOut();
+            PageTransporter.getInstance().goToMain();
+            iLogOut();
         }
     }
-
-    /*Todo apply after all
-    @After("@loginFailed")
-    public void afterLoginFailed()
-    {
-        DriverManager.getInstance().close();
-    }*/
 }

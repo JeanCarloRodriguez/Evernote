@@ -6,13 +6,13 @@ Feature: Note
 
   @createNotebook
   Scenario: I can create a note inside a notebook
-    Given I create a noteBook called "First Notebook"
+    Given I create a noteBook "First Notebook"
     When I create a note "My note" for notebook "First Notebook"
     Then The note "My note" is in the note list of "First Notebook" notebook
 
   @createNotebook
   Scenario: I can delete a note
-    Given I create a noteBook called "for delete"
+    Given I create a noteBook "for delete"
       And I create a note "note for delete" for notebook "for delete"
     When I delete the note "note for delete"
     Then a message confirming that a note was deleted is displayed

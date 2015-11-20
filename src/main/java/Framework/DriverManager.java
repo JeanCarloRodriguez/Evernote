@@ -4,6 +4,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,9 +19,10 @@ public class DriverManager {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
+    final static Logger logger = Logger.getLogger(DriverManager.class);
 
     protected DriverManager(){
-
+       //logger.setLevel(Level.INFO);
     }
 
     public static DriverManager getInstance()
@@ -31,6 +34,7 @@ public class DriverManager {
             {
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
                 driver = new ChromeDriver();
+                logger.info("initializing the driver");
                 //driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
@@ -38,7 +42,7 @@ public class DriverManager {
             }
             if(wait == null)
             {
-                wait = new WebDriverWait(driver,15);
+                wait = new WebDriverWait(driver,20);
             }
 
         }
