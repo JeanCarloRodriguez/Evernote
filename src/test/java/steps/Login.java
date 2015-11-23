@@ -28,6 +28,11 @@ public class Login {
     public Login(){
     }
 
+    public boolean getLoggedIn()
+    {
+        return loggedIn;
+    }
+
     @Given("^I try to login with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
     public void loginIntoWebPageSuccess(String user, String password)
     {
