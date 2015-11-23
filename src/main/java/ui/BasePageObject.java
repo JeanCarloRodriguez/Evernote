@@ -40,4 +40,25 @@ public abstract class BasePageObject {
             return false;
         }
     }
+
+    public boolean isDeleted(int numberOfTries, By by)
+    {
+        boolean isDeleted = false;
+        int count = 0;
+        while(count!=numberOfTries)
+        {
+            count++;
+            try {
+                Thread.sleep(200);
+            }catch (Exception e){
+                System.out.println("Sleep fails: "+e);
+            }
+
+            if(!isPresent(by)){
+                isDeleted =  true;
+                count= numberOfTries;
+            }
+        }
+        return isDeleted;
+    }
 }

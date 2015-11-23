@@ -2,7 +2,9 @@ package ui;
 
 import Framework.DriverManager;
 import org.openqa.selenium.WebDriver;
+import ui.pages.LoginPage;
 import ui.pages.MainPage;
+import ui.pages.RootPage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +20,7 @@ public class PageTransporter {
     private static String loginUrl;
     private static PageTransporter instance;
 
-    public PageTransporter()
+    private PageTransporter()
     {
         rootUrl = "https://evernote.com";
         mainUrl = "https://www.evernote.com/Home.action";
@@ -35,17 +37,20 @@ public class PageTransporter {
     }
 
 
-    public void goToRoot()
+    public RootPage goToRoot()
     {
         driver.get(rootUrl);
+        return new RootPage();
     }
-    public void goToMain()
+    public MainPage goToMain()
     {
         driver.get(mainUrl);
+        return new MainPage();
     }
-    public void goToLogin()
+    public LoginPage goToLogin()
     {
         driver.get(loginUrl);
+        return new LoginPage();
     }
     public String getMainUrl()
     {

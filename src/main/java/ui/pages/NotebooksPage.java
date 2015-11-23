@@ -22,7 +22,7 @@ public class NotebooksPage extends BasePageObject {
     @FindBy(xpath = "//div[@id='gwt-debug-NotebooksDrawer-createNotebookButton']")
     WebElement newNotebookButton;
 
-    @FindBy(xpath = "//div[contains(@class,'GLATSGFCCSB GLATSGFCGTB qa-notebookWidget qa-trash')]")
+    @FindBy(xpath = "//div[contains(@class,'qa-trash')]")
     WebElement trashButton;
 
 
@@ -34,7 +34,6 @@ public class NotebooksPage extends BasePageObject {
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(slidingPanel));
-        CommonMethods.elementHighlight(slidingPanel);
     }
 
     public NewNotebookPage goToNewNoteBookPage()
@@ -56,5 +55,10 @@ public class NotebooksPage extends BasePageObject {
     public boolean isNotebookExist(String notebookName)
     {
         return isPresent(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]"));
+    }
+    public TrashPage goToTrash()
+    {
+        trashButton.click();
+        return new TrashPage();
     }
 }

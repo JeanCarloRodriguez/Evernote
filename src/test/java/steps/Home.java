@@ -2,7 +2,7 @@ package steps;
 
 import cucumber.api.java.en.Given;
 import ui.PageTransporter;
-import ui.pages.HomePage;
+import ui.pages.RootPage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,23 +12,17 @@ import ui.pages.HomePage;
  * To change this template use File | Settings | File Templates.
  */
 public class Home {
-    HomePage homePage;
-    PageTransporter pageTransporter;
-    public Home()
-    {
-        pageTransporter = new PageTransporter();
-    }
+    RootPage rootPage;
 
     @Given("^I go to the root Page$")
     public void iGoToTheRootPage()
     {
-        PageTransporter.getInstance().goToRoot();
-        homePage = new HomePage();
+        rootPage = PageTransporter.getInstance().goToRoot();
     }
 
     @Given("^I Go to the log in Page$")
     public void goToLoginPage()
     {
-        homePage.goToLoginPage();
+        rootPage.goToLoginPage();
     }
 }

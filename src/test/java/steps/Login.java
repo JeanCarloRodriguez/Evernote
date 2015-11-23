@@ -23,13 +23,12 @@ public class Login {
     LoginPage loginPage;
     LogOutPage logOutPage;
     String userEmail;
-    boolean loggedIn;
-    public Login(){
-        loggedIn = false;
-    }
-    private PageTransporter pageTransporter = PageTransporter.getInstance();
+    static boolean loggedIn = false;
 
-    @Given("^I Login into the web page with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
+    public Login(){
+    }
+
+    @Given("^I try to login with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
     public void loginIntoWebPageSuccess(String user, String password)
     {
         loginPage = new LoginPage();
@@ -73,12 +72,13 @@ public class Login {
     @When("^I log out$")
     public void iLogOut()
     {
-        logOutPage =mainPage.logOut();
+        PageTransporter.getInstance().goToMain().logOut();
         loggedIn = false;
     }
     @Then("^a message is displayed confirming the log out$")
     public void aMessageIsDisplayedConfirmingTheLogOut()
     {
+        LogOutPage logOutPage = new LogOutPage();
         String actualResult = logOutPage.getLogOutMessage();
         String expectedResult = "You have successfully been logged out of Evernote.";
         Assert.assertEquals(actualResult,expectedResult);
@@ -87,15 +87,16 @@ public class Login {
     @Given("I log in with the user \"([^\\\"]*)\" and the password \"([^\\\"]*)\"")
     public void iLogInWithTheUserAndPassword(String user, String password)
     {
-
-
-        if(!CommonMethods.theAccountIsLogin())
+        //Todo this method theAccountIsLogin should be applied?
+        //if(!CommonMethods.theAccountIsLogin())
+        if(!loggedIn)
         {
-            pageTransporter.goToLogin();
+            PageTransporter.getInstance().goToLogin();
             loginIntoWebPageSuccess(user, password);
+            loggedIn = true;
         }
         else{
-            loggedIn = true;
+            PageTransporter.getInstance().goToMain();
             System.out.println("The account :"+user+" is already log in");
         }
     }
@@ -103,7 +104,13 @@ public class Login {
     @Given("^I go to the main Page$")
     public void iGoToTheMainPage()
     {
-        pageTransporter.goToMain();
+        PageTransporter.getInstance().goToMain();
+    }
+
+    @Given("^Im in the log in Page$")
+    public void imInTheLoginPage()
+    {
+        PageTransporter.getInstance().goToLogin();
     }
 
     @Before("@Login")
@@ -111,7 +118,6 @@ public class Login {
     {
         if(loggedIn)
         {
-            PageTransporter.getInstance().goToMain();
             iLogOut();
         }
     }

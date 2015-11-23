@@ -29,9 +29,8 @@ public class CommonMethods {
     }
     public static boolean theAccountIsLogin()
     {
-        PageTransporter pageTransporter = new PageTransporter();
         WebDriver driver = DriverManager.getInstance().getWebDriver();
-        pageTransporter.goToLogin();
+        PageTransporter.getInstance().goToLogin();
         if(driver.getCurrentUrl().contains("login=true"))
             return true;
         else

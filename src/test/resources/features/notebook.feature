@@ -16,7 +16,6 @@ Scenario: I can delete a notebook
   Then the notebook "My notebook2" is not present in the list of notebooks
 
 @createNotebook
-@lastScenarioOfFeature
 Scenario: At try to create two notebook with the same name a message is displayed
   Given I create a noteBook "Todo"
   When I create a noteBook "Todo"

@@ -5,7 +5,7 @@ Feature: Login
   Scenario: login successful
   Given I go to the root Page
   And I Go to the log in Page
-  When I Login into the web page with a correct email "testautomated91@gmail.com" and the password "Client123"
+  When I try to login with a correct email "testautomated91@gmail.com" and the password "Client123"
   Then I am in the main page
     And Im login with the correct user
 
@@ -15,8 +15,7 @@ Feature: Login
   Then a message is displayed confirming the log out
 
   Scenario Outline: Login Unsuccessful
-   Given I go to the root Page
-   And I Go to the log in Page
+   Given Im in the log in Page
    When I Login into the web page with a wrong email "<email>" and the password "<password>"
    Then a message error "<errorMessage>" is displayed for the login failed
    Examples:

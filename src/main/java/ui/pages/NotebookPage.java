@@ -21,6 +21,8 @@ public class NotebookPage extends BasePageObject {
     @FindBy(xpath = "//span[@class='gwt-InlineLabel']")
     WebElement errorMessageText;
 
+
+
     public NotebookPage()
     {
         waitUntilPageObjectIsLoaded();

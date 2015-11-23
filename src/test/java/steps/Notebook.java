@@ -1,6 +1,7 @@
 package steps;
 
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,12 +21,10 @@ import ui.pages.NotebookPage;
  */
 public class Notebook {
     MainPage mainPage;
-    LeftMenuPage leftMenuPage;
     NotebookPage notebookPage;
-    String name;
+    static String name;
     public Notebook(){
         mainPage = new MainPage();
-        //leftMenuPage = new LeftMenuPage();
     }
 
     @Given("I create a noteBook \"([^\\\"]*)\"")
@@ -76,6 +75,14 @@ public class Notebook {
         String expectedResult = message;
 
         Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @When("^I go to trash page$")
+    public void iGoToTrashPage()
+    {
+        mainPage.getLeftMenu()
+                .goToNotebooksPage()
+                .goToTrash();
     }
 
     @After("@createNotebook")

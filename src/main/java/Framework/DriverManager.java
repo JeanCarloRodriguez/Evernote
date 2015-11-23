@@ -32,10 +32,10 @@ public class DriverManager {
             instance = new DriverManager();
             if(driver == null)
             {
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-                driver = new ChromeDriver();
+                //System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                //driver = new ChromeDriver();
+                driver = new FirefoxDriver();
                 logger.info("initializing the driver");
-                //driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 driver.get("https://www.evernote.com/");
@@ -57,9 +57,9 @@ public class DriverManager {
         return driver;
     }
 
-    public void close()
+    public void quit()
     {
-        driver.close();
+        driver.quit();
         driver = null;
     }
 }
