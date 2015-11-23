@@ -1,5 +1,5 @@
-@note
-Feature: Notes
+@Todo
+Feature: Todo
   Description: notes feature(create, modify, send to trash, delete from trash, share)
 Background:
   Given I go to the root Page
