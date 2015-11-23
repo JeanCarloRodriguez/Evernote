@@ -32,8 +32,6 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
             DriverManager.getInstance().quit();
         } catch (Exception e) {
             logger.error("Unable to quit the driver", e);
-        } finally {
-            //DriverManager.getInstance().close();
         }
     }
 
