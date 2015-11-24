@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ui.PageTransporter;
+import ui.pages.MainPage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,10 +31,22 @@ public class CommonMethods {
     public static boolean theAccountIsLogin()
     {
         WebDriver driver = DriverManager.getInstance().getWebDriver();
-        PageTransporter.getInstance().goToLogin();
-        if(driver.getCurrentUrl().contains("login=true"))
+        if(driver.getCurrentUrl().contains("evernote.com/Home.action"))
             return true;
         else
             return false;
+    }
+    public static void logOut()
+    {
+        PageTransporter.getInstance().goToMain().logOut();
+    }
+
+    public static void emptyAllNotes() {
+        PageTransporter.getInstance()
+                .goToMain()
+                .getLeftMenu()
+                .goToNotebooksPage()
+                .goToTrash()
+                .emptyAllNotes();
     }
 }

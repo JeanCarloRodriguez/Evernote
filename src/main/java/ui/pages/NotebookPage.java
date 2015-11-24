@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ui.BasePageObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +12,7 @@ import ui.BasePageObject;
  * Time: 5:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NotebookPage extends BasePageObject {
+public class NotebookPage extends NotesContainer {
 
     @FindBy(id = "gwt-debug-NotebookHeader-name")
     WebElement notebookTitle;

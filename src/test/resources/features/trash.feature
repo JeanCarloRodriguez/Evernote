@@ -2,7 +2,7 @@
 Feature: trash
   Description: all the scenarios for trash are in this feature
   Background:
-    Given I log in with the user "testautomated91@gmail.com" and the password "Client123"
+    Given Im logged in with the user "testautomated91@gmail.com" and the password "Client123"
 
   @createNotebook
   Scenario: I can empty all the notes from the trash

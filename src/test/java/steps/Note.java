@@ -33,7 +33,7 @@ public class Note {
                 .createNote(noteName,notebookName);
 
     }
-    @Then("^The note \"([^\\\"]*)\" is in the note list of \"([^\\\"]*)\" notebook$")
+    @Then("^the note \"([^\\\"]*)\" is in the note list of \"([^\\\"]*)\" notebook$")
     public void theNoteIsInTheNoteListOfTheNotebook(String noteName,String notebookName)
     {
         notebookPage = new NotebookPage();
@@ -51,8 +51,8 @@ public class Note {
     @Then("^the note \"([^\\\"]*)\" is not displayed in the list of notes$")
     public void theNoteIsNotInTheList(String noteName)
     {
-        boolean actualResult = notesPage.isNoteExist(noteName);
-        boolean expectedResult = false;
+        boolean actualResult = notesPage.theNoteWasDeleted(noteName);
+        boolean expectedResult = true;
         Assert.assertEquals(actualResult,expectedResult);
     }
 
@@ -62,5 +62,12 @@ public class Note {
         String actualResult = notesPage.getDeleteMessage();
         String expectedResult = name+" "+"moved to Trash.";
         Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @When("^I sort the list of notes by \"([^\\\"]*)\"$")
+    public void iSortTheListOfNotesBy(String sortBy)
+    {
+        NotebookPage notebookPage = new NotebookPage();
+        notebookPage.chooseSortOption(sortBy);
     }
 }

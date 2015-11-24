@@ -10,13 +10,13 @@ Feature: Login
     And Im login with the correct user
 
   Scenario: Log out successful
-  Given I log in with the user "testautomated91@gmail.com" and the password "Client123"
+  Given Im logged in with the user "testautomated91@gmail.com" and the password "Client123"
   When I log out
   Then a message is displayed confirming the log out
 
   Scenario Outline: Login Unsuccessful
    Given Im in the log in Page
-   When I Login into the web page with a wrong email "<email>" and the password "<password>"
+   When I login into the web page with a wrong email "<email>" and the password "<password>"
    Then a message error "<errorMessage>" is displayed for the login failed
    Examples:
    | email               | password | errorMessage |

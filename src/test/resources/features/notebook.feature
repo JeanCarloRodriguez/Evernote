@@ -3,7 +3,7 @@ Feature: Notebook
   Description: Scenarios for notebook
 
 Background:
- Given I log in with the user "testautomated91@gmail.com" and the password "Client123"
+ Given Im logged in with the user "testautomated91@gmail.com" and the password "Client123"
 
 @createNotebook
 Scenario: I can create a notebook

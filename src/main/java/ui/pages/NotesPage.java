@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ui.BasePageObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +12,7 @@ import ui.BasePageObject;
  * Time: 5:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NotesPage extends BasePageObject {
+public class NotesPage extends NotesContainer {
 
     @FindBy(xpath = "//div[@class=\'NotesView-ScrollWindow\']")
     WebElement notesView;
@@ -30,6 +29,10 @@ public class NotesPage extends BasePageObject {
     public boolean isNoteExist(String noteName)
     {
         return isPresent(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']"));
+    }
+    public boolean theNoteWasDeleted(String noteName)
+    {
+        return isDeleted(10, By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '" + noteName + "']"));
     }
 
     public DeleteNoteConfirmationPage goToDeleteNoteConfirmationPage(String noteName)

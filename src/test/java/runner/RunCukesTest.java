@@ -5,7 +5,9 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import steps.Login;
+import ui.common.CommonMethods;
 import ui.pages.MainPage;
 
 /**
@@ -19,16 +21,22 @@ import ui.pages.MainPage;
         monochrome = true)
 public class RunCukesTest  extends AbstractTestNGCucumberTests {
     final static Logger logger = Logger.getLogger(RunCukesTest.class);
+    @BeforeTest
+    public void beforeTest()
+    {
+        System.out.println("Before all the execution");
+    }
+
     @AfterTest
     public void afterExecution() {
 
         try {
-            Login login = new Login();
-            if(login.getLoggedIn())
+            if(CommonMethods.theAccountIsLogin())
             {
-                MainPage mainPage = new MainPage();
-                mainPage.logOut();
+                CommonMethods.emptyAllNotes();
+                CommonMethods.logOut();
             }
+
             DriverManager.getInstance().quit();
         } catch (Exception e) {
             logger.error("Unable to quit the driver", e);

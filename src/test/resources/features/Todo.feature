@@ -2,18 +2,10 @@
 Feature: Todo
   Description: notes feature(create, modify, send to trash, delete from trash, share)
 Background:
-  Given I go to the root Page
-    And I Go to the log in Page
-    And I Login into the web page with a correct email "alejandrojeancarlo@gmail.com" and the password "motifxf7"
+  Given Im logged in with the user "testautomated91@gmail.com" and the password "Client123"
 
 
-Scenario: a note should be showed at the begin of the list when is created in a noteBook with 2 other notes
-Given I create a noteBook called "Automation tasks"
-  And the noteBook haves 2 notes called "first note", "second note"
-When I create a new note   Called "Last Note"
-  And I sort the notes by "Date Created(newest first)"
-Then the new note should be created
-  And the new note should be at the beginning of the list
+
 
 Scenario: a entire notebook with a note is removed and then the note is restored, the task should be restored in other notebook because a notebook can not be restored
 Given I have created notebooks called "First notebook, Second notebook"

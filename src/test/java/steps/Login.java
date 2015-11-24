@@ -21,16 +21,9 @@ import org.testng.Assert;
 public class Login {
     MainPage mainPage;
     LoginPage loginPage;
-    LogOutPage logOutPage;
     String userEmail;
-    static boolean loggedIn = false;
 
     public Login(){
-    }
-
-    public boolean getLoggedIn()
-    {
-        return loggedIn;
     }
 
     @Given("^I try to login with a correct email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
@@ -39,7 +32,6 @@ public class Login {
         loginPage = new LoginPage();
         mainPage = loginPage.loginSuccessful(user,password);
         userEmail = user;
-        loggedIn = true;
     }
 
     @Then("^I am in the main page$")
@@ -58,7 +50,7 @@ public class Login {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @Given("^I Login into the web page with a wrong email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
+    @Given("^I login into the web page with a wrong email \"([^\\\"]*)\" and the password \"([^\\\"]*)\"$")
     public void loginIntoWebPageFail(String user, String password)
     {
         loginPage = new LoginPage();
@@ -78,7 +70,6 @@ public class Login {
     public void iLogOut()
     {
         PageTransporter.getInstance().goToMain().logOut();
-        loggedIn = false;
     }
     @Then("^a message is displayed confirming the log out$")
     public void aMessageIsDisplayedConfirmingTheLogOut()
@@ -89,16 +80,13 @@ public class Login {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @Given("I log in with the user \"([^\\\"]*)\" and the password \"([^\\\"]*)\"")
+    @Given("Im logged in with the user \"([^\\\"]*)\" and the password \"([^\\\"]*)\"")
     public void iLogInWithTheUserAndPassword(String user, String password)
     {
-        //Todo this method theAccountIsLogin should be applied?
-        //if(!CommonMethods.theAccountIsLogin())
-        if(!loggedIn)
+        if(!CommonMethods.theAccountIsLogin())
         {
             PageTransporter.getInstance().goToLogin();
             loginIntoWebPageSuccess(user, password);
-            loggedIn = true;
         }
         else{
             PageTransporter.getInstance().goToMain();
@@ -121,7 +109,7 @@ public class Login {
     @Before("@Login")
     public void verifyLogoutUser()
     {
-        if(loggedIn)
+        if(CommonMethods.theAccountIsLogin())
         {
             iLogOut();
         }

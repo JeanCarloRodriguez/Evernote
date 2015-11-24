@@ -29,7 +29,7 @@ public class DeleteNoteConfirmationPage extends BasePageObject {
 
     /**
      * This method clicks in delete button to remove the note
-     * @return a instance of NotePage
+     * @return a instance of EditNotePage
      */
     public NotesPage delete()
     {
