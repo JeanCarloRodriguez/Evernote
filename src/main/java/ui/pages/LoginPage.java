@@ -74,18 +74,4 @@ public class LoginPage extends BasePageObject {
     {
         return errorStatusField.getText();
     }
-    /*
-    public MainPage loginSuccessful(String userName, String password) {
-        login(userName, password);
-        return clickLoginBtnSuccessful();
-    }
-
-    public LoginPage loginFailed(String userName, String password) {
-        login(userName, password);
-        return clickLoginBtnFailed();
-    }
-
-    public String getErrorMessage() {
-       return loginErrorMessage.getText();
-    } */
 }

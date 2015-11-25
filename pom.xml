@@ -26,7 +26,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>0.1.0</version>
+            <version>0.6.0</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -107,7 +107,7 @@
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>0.0.8</version>
+                <version>0.1.0</version>
                 <executions>
                     <execution>
                         <id>execution</id>

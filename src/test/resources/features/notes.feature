@@ -18,11 +18,12 @@ Feature: Note
     Then a message confirming that a note was deleted is displayed
       And the note "karaoke" is not displayed in the list of notes
 
+  @createNotebook
   Scenario: a note should be showed at the begin of the list when is created in a noteBook with 2 other notes
     Given I create a noteBook "Automation tasks"
       And I create a note "first note" for notebook "Automation tasks"
       And I create a note "second note" for notebook "Automation tasks"
     When I create a note "last note" for notebook "Automation tasks"
     Then the note "last note" is in the note list of "Automation tasks" notebook
-    When I sort the list of notes by "Date Updated (newest first)"
-    Then the new note should be at the beginning of the list
+    When I sort the list of notes by "Date Created (newest first)"
+    Then the "last note" should be at the beginning of the list of notes

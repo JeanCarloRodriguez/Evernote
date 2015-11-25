@@ -70,4 +70,14 @@ public class Note {
         NotebookPage notebookPage = new NotebookPage();
         notebookPage.chooseSortOption(sortBy);
     }
+
+    @Then("^the \"([^\\\"]*)\" should be at the beginning of the list of notes$")
+    public void theNewNoteShouldBeAtTheBeginningOfTheList(String noteName)
+    {
+        NotebookPage notebookPage = new NotebookPage();
+        String actualResult = notebookPage.getFirstNote();
+        String expectedResult = noteName;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+
 }

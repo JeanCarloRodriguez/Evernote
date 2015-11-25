@@ -28,16 +28,7 @@ When I Share the note with the account "test222324@gmail.com"
 Then is possible to see the note in the account "test222324@gmail.com"
   And is possible to download the file attached
 
-Scenario: Two accounts should be able to chat with each other
-Given I have two user accounts logged
-When the user "User1" send the message "hello" to the user "User2"
-  And the User "User1" share a notebook with the user "User2"
-Then the user "User2" should receive the message "hello" from user "User1"
-  And the user "User2" should receive a shared notebook
-When the user "User2" send the message "hello" to the user "User1"
-  And the User "User2" share a notebook with the user "User1"
-Then the user "User1" should receive the message "hello" from user "User2"
-  And the user "User1" should receive a shared notebook
+
 
 Scenario: at have a note in the notebook called "To do", should be possible to move this note to another notebook called "Done"
 Given I create the notebooks: To do, Done.

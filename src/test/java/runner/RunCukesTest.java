@@ -6,13 +6,8 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import steps.Login;
 import ui.common.CommonMethods;
-import ui.pages.MainPage;
 
-/**
- * Created by silvia valencia on 11/9/2015.
- */
 @CucumberOptions(
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"},
         glue={"steps"},
@@ -42,5 +37,4 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
             logger.error("Unable to quit the driver", e);
         }
     }
-
 }

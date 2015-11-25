@@ -76,7 +76,7 @@ public class Login {
     {
         LogOutPage logOutPage = new LogOutPage();
         String actualResult = logOutPage.getLogOutMessage();
-        String expectedResult = "You have successfully been logged out of Evernote.";
+        String expectedResult = "You have successfully been logged out of Evernote..";
         Assert.assertEquals(actualResult,expectedResult);
     }
 

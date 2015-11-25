@@ -15,6 +15,9 @@ public class LeftMenuPage extends BasePageObject {
     @FindBy(id = "gwt-debug-Sidebar-newNoteButton-container")
     WebElement newNoteButton;
 
+    @FindBy(id = "gwt-debug-Sidebar-workChatButton-container")
+    WebElement workChatButton;
+
     @FindBy(xpath = "//div[@id='gwt-debug-AccountMenu-avatar']//img[contains(@src,'/shard/')]")
     WebElement accountMenuButton;
 
@@ -92,5 +95,11 @@ public class LeftMenuPage extends BasePageObject {
     public void clickOnAccountMenuButton()
     {
         accountMenuButton.click();
+    }
+
+    public WorkChatPage goToWorkChat() {
+
+        workChatButton.click();
+        return new WorkChatPage();
     }
 }

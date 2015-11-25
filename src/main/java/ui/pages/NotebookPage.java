@@ -36,10 +36,4 @@ public class NotebookPage extends NotesContainer {
         System.out.println("the name of the new notebook is: "+notebookTitle.getText());
         return notebookTitle.getText();
     }
-    public boolean isNoteExist(String notebookName)
-    {
-        return isPresent(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+notebookName+"']"));
-    }
-
-
 }

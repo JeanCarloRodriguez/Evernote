@@ -1,9 +1,11 @@
 package steps.hooks;
 
 import Framework.DriverManager;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
-import ui.common.CommonMethods;
-import ui.pages.MainPage;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,20 +15,15 @@ import ui.pages.MainPage;
  * To change this template use File | Settings | File Templates.
  */
 public class GlobalHooks {
-    MainPage mainPage;
-    public GlobalHooks()
-    {
-        mainPage = new MainPage();
-    }
-    /*TODO after all method
-    @After(order = 1)
-    public void lastScenarioOfFeature()
-    {
-        if(CommonMethods.theAccountIsLogin())
-        {
-            mainPage.getLeftMenu().logOut();
+    WebDriver webDriver = DriverManager.getInstance().getWebDriver();
+    @After
+    public void tearDown(Scenario scenario) {
+        System.out.println("********************************************************************************************************************************");
+        if (scenario.isFailed()) {
+            // Take a screenshot...
+            final byte[] screenShot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenShot, "image/png"); // ... and embed it in the report.
+            System.out.println("the Scenario: "+ scenario.getName()+" Failed!!!!");
         }
-        DriverManager.getInstance().close();
     }
-    */
 }
