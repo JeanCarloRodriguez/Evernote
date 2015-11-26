@@ -35,11 +35,11 @@ public class NotesPage extends NotesContainer {
         return isDeleted(10, By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '" + noteName + "']"));
     }
 
-    public DeleteNoteConfirmationPage goToDeleteNoteConfirmationPage(String noteName)
+    public ConfirmationPage goToDeleteNoteConfirmationPage(String noteName)
     {
         WebElement deleteNoteButton = driver.findElement(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']//parent::div//following-sibling::div//div[contains(@class,'qa-deleteButton')]"));
         deleteNoteButton.click();
-        return new DeleteNoteConfirmationPage();
+        return new ConfirmationPage();
     }
 
     public String getDeleteMessage()

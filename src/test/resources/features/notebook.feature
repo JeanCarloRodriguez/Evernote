@@ -19,4 +19,4 @@ Scenario: I can delete a notebook
 Scenario: At try to create two notebook with the same name a message is displayed
   Given I create a noteBook "Todo"
   When I create a noteBook "Todo"
-  Then a message error "The notebook title entered already exists. Please choose another title." is displayed at try to created a duplicate notebook name
+  Then a message error is displayed at try to created a duplicate notebook name

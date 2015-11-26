@@ -45,7 +45,7 @@ public class Note {
     @When("^I delete the note \"([^\\\"]*)\"$")
     public void iDeleteANoteFromTheNoteList(String noteName)
     {
-        notesPage = mainPage.getLeftMenu().goToNotesPage().goToDeleteNoteConfirmationPage(noteName).delete();
+        mainPage.getLeftMenu().goToNotesPage().goToDeleteNoteConfirmationPage(noteName).confirm();
         name = noteName;
     }
     @Then("^the note \"([^\\\"]*)\" is not displayed in the list of notes$")
@@ -59,6 +59,7 @@ public class Note {
     @Then("^a message confirming that a note was deleted is displayed$")
     public void aMessageConfirmingThatANoteWasDeleted()
     {
+        notesPage = new NotesPage();
         String actualResult = notesPage.getDeleteMessage();
         String expectedResult = name+" "+"moved to Trash.";
         Assert.assertEquals(actualResult,expectedResult);

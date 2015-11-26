@@ -18,12 +18,10 @@ public class GlobalHooks {
     WebDriver webDriver = DriverManager.getInstance().getWebDriver();
     @After
     public void tearDown(Scenario scenario) {
-        System.out.println("********************************************************************************************************************************");
         if (scenario.isFailed()) {
             // Take a screenshot...
             final byte[] screenShot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenShot, "image/png"); // ... and embed it in the report.
-            System.out.println("the Scenario: "+ scenario.getName()+" Failed!!!!");
         }
     }
 }

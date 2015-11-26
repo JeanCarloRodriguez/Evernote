@@ -24,14 +24,12 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
 
     @AfterTest
     public void afterExecution() {
-
+        if(CommonMethods.theAccountIsLogin())
+        {
+            CommonMethods.emptyAllNotes();
+            CommonMethods.logOut();
+        }
         try {
-            if(CommonMethods.theAccountIsLogin())
-            {
-                CommonMethods.emptyAllNotes();
-                CommonMethods.logOut();
-            }
-
             DriverManager.getInstance().quit();
         } catch (Exception e) {
             logger.error("Unable to quit the driver", e);

@@ -1,7 +1,10 @@
 package steps;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 import ui.pages.MainPage;
 import ui.pages.WorkChatPage;
@@ -13,13 +16,15 @@ import ui.pages.WorkChatPage;
  */
 public class WorkChat {
 
+    static String userEmailConversation;
+
     @And("^I send a chat message \"([^\\\"]*)\" to \"([^\\\"]*)\"$")
     public void iSendAChatMessageTo(String message,String email)
     {
-        MainPage mainPage = new MainPage();
-        mainPage.getLeftMenu().goToWorkChat()
-                .startChat()
-                .sendMessageTo(email,message);
+        WorkChatPage workChatPage = new WorkChatPage();
+        workChatPage.startChat()
+                .sendMessageTo(email, message);
+        userEmailConversation = email;
     }
 
     @Then("^a message confirming that a message was send is displayed$")
@@ -31,6 +36,60 @@ public class WorkChat {
         String actualResult = mainPage.getErrorMessage();
         String expectedResult = "Message sent";
         Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @And("^a conversation with the user \"([^\\\"]*)\" is displayed$")
+    public void aConversationWithTheUserIsDisplayed(String userEmail)
+    {
+        WorkChatPage workChatPage = new WorkChatPage();
+        boolean actualResult = workChatPage.isConversationPresent(userEmail);
+        boolean expectedResult = true;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @Then("^a conversation with the user \"([^\\\"]*)\" is deleted$")
+    public void aConversationWithTheUserIsDeleted(String userEmail)
+    {
+        WorkChatPage workChatPage = new WorkChatPage();
+        boolean actualResult = workChatPage.isConversationDeleted(userEmail);
+        boolean expectedResult = true;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @And("^the message \"([^\\\"]*)\" is displayed for the user \"([^\\\"]*)\"$")
+    public void theMessageIsDisplayedForTheUser(String message, String userEmail)
+    {
+        WorkChatPage workChatPage = new WorkChatPage();
+        boolean actualResult = workChatPage.isMessageDisplayedInConversationOverView(userEmail,message);
+        boolean expectedResult = true;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @When("^I remove the conversation$")
+    public void iRemoveTheConversation()
+    {
+        WorkChatPage workChatPage = new WorkChatPage();
+        workChatPage.removeConversation(userEmailConversation);
+    }
+
+
+    @After("@removeConversation")
+    public void removeConversation()
+    {
+        if(userEmailConversation !=null)
+        {
+            iRemoveTheConversation();
+        }
+        else
+        {
+            System.out.println("No user email conversation was found!! in WorkChat.java");
+        }
+    }
+    @Given("^I Go to the Work Chat tab$")
+    public void iGoToTheWorkChatTab()
+    {
+        MainPage mainPage = new MainPage();
+        mainPage.getLeftMenu().goToWorkChat();
     }
 
 }

@@ -18,9 +18,6 @@ public class TrashPage extends NotesContainer {
     @FindBy(xpath = "//div[@id='gwt-debug-trashHeaderContainer']//button[text()='Empty trash']")
     WebElement emptyButton;
 
-    //@FindBy(xpath = "//div[@class='focus-NotesView-Subheader']//div[contains(@class,'qa-notesCount')]")
-    //WebElement notesCountLabel;
-
     public TrashPage(){
         waitUntilPageObjectIsLoaded();
     }
@@ -30,16 +27,24 @@ public class TrashPage extends NotesContainer {
         wait.until(ExpectedConditions.visibilityOf(trashHeader));
     }
 
-    public EmptyTrashConfirmationPage clickOnEmptyButton()
+    public ConfirmationPage clickOnEmptyButton()
     {
         emptyButton.click();
-        return new EmptyTrashConfirmationPage();
+        return new ConfirmationPage();
     }
 
 
     public TrashPage emptyAllNotes()
     {
-        clickOnEmptyButton().confirm();
+        //Todo the button empty is not present when the number of notes is 0
+        if(!getNotesCount().equalsIgnoreCase("0 notes"))
+        {
+            clickOnEmptyButton().confirm();
+            isEmpty();
+        }else{
+            System.out.println("the trash is already empty");
+        }
+
         return this;
     }
 

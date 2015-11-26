@@ -3,6 +3,7 @@ package ui;
 import Framework.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,7 +15,7 @@ import org.openqa.selenium.NoSuchElementException;
 public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebDriverWait wait;
-
+    protected Actions action;
     /**
      * Initializes the web driver, wait and web elements
      */
@@ -22,6 +23,7 @@ public abstract class BasePageObject {
         this.driver = DriverManager.getInstance().getWebDriver();
         this.wait = DriverManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
+        action = new Actions(driver);
     }
 
     public abstract void waitUntilPageObjectIsLoaded();

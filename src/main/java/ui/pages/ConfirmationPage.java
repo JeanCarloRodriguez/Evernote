@@ -6,19 +6,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
- * User: Jean Carlo Rodriguez
- * Date: 11/16/15
- * Time: 2:53 PM
+ * User: jeancarlorodriguez
+ * Date: 11/25/15
+ * Time: 11:10 AM
  */
-public class DeleteNoteConfirmationPage extends BasePageObject {
+public class ConfirmationPage extends BasePageObject {
 
     @FindBy(id = "gwt-debug-ConfirmationDialog-confirm")
     WebElement deleteButton;
 
-    @FindBy(xpath = "//div[@class='GLATSGFCO4B GLATSGFCLD']")
+    @FindBy(xpath = "//div[@id='gwt-debug-GlassModalDialog-content']/div/div")
     WebElement confirmationMessage;
 
-    public DeleteNoteConfirmationPage()
+    public ConfirmationPage()
     {
         waitUntilPageObjectIsLoaded();
     }
@@ -27,23 +27,12 @@ public class DeleteNoteConfirmationPage extends BasePageObject {
         wait.until(ExpectedConditions.visibilityOf(deleteButton));
     }
 
-    /**
-     * This method clicks in delete button to remove the note
-     * @return a instance of EditNotePage
-     */
-    public NotesPage delete()
+    public void confirm()
     {
         deleteButton.click();
-        return new NotesPage();
     }
-
-    /**
-     * this method return the confirmation message at delete a note
-     * @return a String with the message of confirmation
-     */
     public String getMessageOfDeleteConfirmation()
     {
         return confirmationMessage.getText();
     }
-
 }

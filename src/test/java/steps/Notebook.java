@@ -1,14 +1,12 @@
 package steps;
 
 import cucumber.api.java.After;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 import ui.PageTransporter;
-import ui.pages.DeleteNotebookConfirmationPage;
-import ui.pages.LeftMenuPage;
+import ui.pages.ConfirmationPage;
 import ui.pages.MainPage;
 import ui.pages.NotebookPage;
 
@@ -50,9 +48,9 @@ public class Notebook {
     @When("^I delete a notebook \"([^\\\"]*)\"$")
     public void iDeleteANotebook(String notebookName)
     {
-        DeleteNotebookConfirmationPage confirmationPage = mainPage.getLeftMenu().goToNotebooksPage()
+        ConfirmationPage confirmationPage = mainPage.getLeftMenu().goToNotebooksPage()
                 .deleteANotebookCalled(notebookName);
-        confirmationPage.delete();
+        confirmationPage.confirm();
     }
 
     @Then("^the notebook \"([^\\\"]*)\" is not present in the list of notebooks$")
@@ -65,14 +63,13 @@ public class Notebook {
         boolean expectedResult = false;
 
         Assert.assertEquals(actualResults,expectedResult);
-
     }
 
-    @Then("^a message error \"([^\\\"]*)\" is displayed at try to created a duplicate notebook name$")
-    public void AMessageIsDisplayedAtTryToCreateANotebookWithTheSameName(String message)
+    @Then("^a message error is displayed at try to created a duplicate notebook name$")
+    public void AMessageIsDisplayedAtTryToCreateANotebookWithTheSameName()
     {
         String actualResult = mainPage.getErrorMessage();
-        String expectedResult = message;
+        String expectedResult = "The notebook title entered already exists. Please choose another title.";
 
         Assert.assertEquals(actualResult,expectedResult);
     }

@@ -22,7 +22,6 @@ public class DriverManager {
     final static Logger logger = Logger.getLogger(DriverManager.class);
 
     protected DriverManager(){
-       //logger.setLevel(Level.INFO);
     }
 
     public static DriverManager getInstance()

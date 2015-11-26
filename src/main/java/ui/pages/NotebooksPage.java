@@ -44,11 +44,11 @@ public class NotebooksPage extends BasePageObject {
     }
 
 
-    public DeleteNotebookConfirmationPage deleteANotebookCalled(String notebookName) {
+    public ConfirmationPage deleteANotebookCalled(String notebookName) {
 
         WebElement deleteNotebookButton = driver.findElement(By.xpath("//div[@id = 'gwt-debug-notebooksDrawerSlidingPanel']//div[(text()='"+notebookName+"')]//following-sibling::div//div[contains(@class,'qa-deleteButton')]"));
         deleteNotebookButton.click();
-        return new DeleteNotebookConfirmationPage();
+        return new ConfirmationPage();
 
     }
 
