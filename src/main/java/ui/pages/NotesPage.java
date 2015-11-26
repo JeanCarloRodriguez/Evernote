@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.common.CommonMethods;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,7 +33,7 @@ public class NotesPage extends NotesContainer {
     }
     public boolean theNoteWasDeleted(String noteName)
     {
-        return isDeleted(10, By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '" + noteName + "']"));
+        return isDeleted(Integer.parseInt(CommonMethods.readJsonFile("NumberOfTriesForElementDeleted")), By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '" + noteName + "']"));
     }
 
     public ConfirmationPage goToDeleteNoteConfirmationPage(String noteName)

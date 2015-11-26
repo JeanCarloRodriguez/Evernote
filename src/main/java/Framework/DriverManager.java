@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
+import ui.common.CommonMethods;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,13 +36,13 @@ public class DriverManager {
                 //driver = new ChromeDriver();
                 driver = new FirefoxDriver();
                 logger.info("initializing the driver");
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(Integer.parseInt(CommonMethods.readJsonFile("implicitWait")), TimeUnit.SECONDS);
                 driver.manage().window().maximize();
-                driver.get("https://www.evernote.com/");
+                driver.get(CommonMethods.readJsonFile("rootUrl"));
             }
             if(wait == null)
             {
-                wait = new WebDriverWait(driver,20);
+                wait = new WebDriverWait(driver,Integer.parseInt(CommonMethods.readJsonFile("explicitWait")));
             }
 
         }

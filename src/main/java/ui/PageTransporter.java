@@ -2,6 +2,7 @@ package ui;
 
 import Framework.DriverManager;
 import org.openqa.selenium.WebDriver;
+import ui.common.CommonMethods;
 import ui.pages.LoginPage;
 import ui.pages.MainPage;
 import ui.pages.RootPage;
@@ -22,9 +23,9 @@ public class PageTransporter {
 
     private PageTransporter()
     {
-        rootUrl = "https://evernote.com";
-        mainUrl = "https://www.evernote.com/Home.action";
-        loginUrl = "https://www.evernote.com/Login.action";
+        rootUrl = CommonMethods.readJsonFile("rootUrl");
+        mainUrl = CommonMethods.readJsonFile("mainUrl");
+        loginUrl = CommonMethods.readJsonFile("loginUrl");
     }
 
     public static PageTransporter getInstance()

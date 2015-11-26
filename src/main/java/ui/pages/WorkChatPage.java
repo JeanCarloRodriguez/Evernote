@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
+import ui.common.CommonMethods;
 
 /**
  * User: jeancarlorodriguez
@@ -48,7 +49,7 @@ public class WorkChatPage extends BasePageObject {
     }
     public boolean isConversationDeleted(String userEmail)
     {
-        return isDeleted(10, By.xpath("//div[@id='gwt-debug-workChatDrawerDrawerSlidingPanel']//div[contains(@id,'gwt-debug-ThreadDrawerWidget-threadId')]//div[contains(@class,'qa-name')][text()='\" + userEmail + \"']"));
+        return isDeleted(Integer.parseInt(CommonMethods.readJsonFile("NumberOfTriesForElementDeleted")), By.xpath("//div[@id='gwt-debug-workChatDrawerDrawerSlidingPanel']//div[contains(@id,'gwt-debug-ThreadDrawerWidget-threadId')]//div[contains(@class,'qa-name')][text()='\" + userEmail + \"']"));
     }
 
     public boolean isMessageDisplayedInConversationOverView(String userName,String message)

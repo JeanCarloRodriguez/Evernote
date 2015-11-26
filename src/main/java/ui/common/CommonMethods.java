@@ -1,10 +1,14 @@
 package ui.common;
 
 import Framework.DriverManager;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ui.PageTransporter;
+
+import java.io.FileReader;
 
 
 /**
@@ -48,5 +52,19 @@ public class CommonMethods {
                 .goToNotebooksPage()
                 .goToTrash()
                 .emptyAllNotes();
+    }
+
+    public static String readJsonFile(String tag) {
+        String workingDir = System.getProperty("user.dir");
+        JSONParser parser = new JSONParser();
+        String value = "";
+        try {
+            Object obj = parser.parse(new FileReader(workingDir+"/config.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            value = (String) jsonObject.get(tag);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
     }
 }

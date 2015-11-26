@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.common.CommonMethods;
 
 /**
  * User: jeancarlorodriguez
@@ -52,7 +53,7 @@ public class TrashPage extends NotesContainer {
 
     public boolean isEmpty()
     {
-        return isDeleted(10,By.xpath("//div[@class='NotesView-ScrollWindow']//div[contains(@class,'Notes')]"));
+        return isDeleted(Integer.parseInt(CommonMethods.readJsonFile("NumberOfTriesForElementDeleted")),By.xpath("//div[@class='NotesView-ScrollWindow']//div[contains(@class,'Notes')]"));
     }
 
 }
