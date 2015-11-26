@@ -5,7 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ui.PageTransporter;
-import ui.pages.MainPage;
+
 
 /**
  * Created with IntelliJ IDEA.

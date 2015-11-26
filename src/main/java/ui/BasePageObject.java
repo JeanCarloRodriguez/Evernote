@@ -1,6 +1,7 @@
 package ui;
 
 import Framework.DriverManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,7 @@ public abstract class BasePageObject {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions action;
+    final static Logger logger = Logger.getLogger(BasePageObject.class);
     /**
      * Initializes the web driver, wait and web elements
      */
@@ -53,6 +55,7 @@ public abstract class BasePageObject {
             try {
                 Thread.sleep(200);
             }catch (Exception e){
+                logger.info("Sleep fails: ",e);
                 System.out.println("Sleep fails: "+e);
             }
 

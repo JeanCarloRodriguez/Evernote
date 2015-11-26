@@ -64,7 +64,10 @@ public class WorkChatPage extends BasePageObject {
     }
     public ConfirmationPage clickOnRemoveButton(String userEmail)
     {
-        action.moveToElement(driver.findElement(By.xpath("//div[@id='gwt-debug-workChatDrawerDrawerSlidingPanel']//div[contains(@id,'gwt-debug-ThreadDrawerWidget-threadId')]//div[contains(@class,'qa-name')][text()='" + userEmail + "']//following-sibling::div[contains(@class,'qa-deleteButton')]")))
+        WebElement conversationContainer =driver.findElement(By.xpath("//div[@id='gwt-debug-workChatDrawerDrawerSlidingPanel']//div[contains(@id,'gwt-debug-ThreadDrawerWidget-threadId')]//div[contains(@class,'qa-name')][text()='" + userEmail + "']"));
+        Actions act = action.moveToElement(conversationContainer);
+        WebElement conversationRemoveButton = conversationContainer.findElement(By.xpath("//following-sibling::div[contains(@class,'qa-deleteButton')]"));
+        act.moveToElement(conversationRemoveButton)
                 .click()
                 .build()
                 .perform();

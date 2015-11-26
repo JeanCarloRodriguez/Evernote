@@ -19,6 +19,7 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
     @BeforeTest
     public void beforeTest()
     {
+        logger.info("Test Start!!!!!");
         System.out.println("Before all the execution");
     }
 
@@ -34,5 +35,7 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
         } catch (Exception e) {
             logger.error("Unable to quit the driver", e);
         }
+        logger.info("End test!!!!!");
+
     }
 }
