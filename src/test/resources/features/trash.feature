@@ -6,10 +6,10 @@ Feature: trash
 
   @createNotebook
   Scenario: I can empty all the notes from the trash
-  Given I create a noteBook "For test Trash"
-    And I create a note "note for trash" for notebook "For test Trash"
-    And I delete the note "note for trash"
-  When I go to trash page
-    And I empty all the notes
-  Then the trash is empty
-    And the notes count says "0 notes"
+  Given I create a NoteBook "For test Trash"
+    And I create a Note "note for trash" for Notebook "For test Trash"
+    And I delete the Note "note for trash"
+  When I go to Trash page
+    And I empty all the Notes
+  Then the Trash is empty
+    And the Notes count says "0 notes"

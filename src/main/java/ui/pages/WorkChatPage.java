@@ -1,6 +1,8 @@
 package ui.pages;
 
+import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -65,13 +67,11 @@ public class WorkChatPage extends BasePageObject {
     }
     public ConfirmationPage clickOnRemoveButton(String userEmail)
     {
-        WebElement conversationContainer =driver.findElement(By.xpath("//div[@id='gwt-debug-workChatDrawerDrawerSlidingPanel']//div[contains(@id,'gwt-debug-ThreadDrawerWidget-threadId')]//div[contains(@class,'qa-name')][text()='" + userEmail + "']"));
-        Actions act = action.moveToElement(conversationContainer);
-        WebElement conversationRemoveButton = conversationContainer.findElement(By.xpath("//following-sibling::div[contains(@class,'qa-deleteButton')]"));
-        act.moveToElement(conversationRemoveButton)
-                .click()
-                .build()
-                .perform();
+        By byRemoveButton = By.xpath("//div[contains(@class,'qa-name')][text()='"+userEmail+"']//following-sibling::div[contains(@class,'qa-deleteButton')]");
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byRemoveButton));
+        JavascriptLibrary jsLib = new JavascriptLibrary();
+        jsLib.callEmbeddedSelenium(driver,"triggerMouseEventAt", driver.findElement(byRemoveButton),"click", "0,0");
+
         return new ConfirmationPage();
     }
 }

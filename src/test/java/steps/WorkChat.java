@@ -27,18 +27,18 @@ public class WorkChat {
         userEmailConversation = email;
     }
 
-    @Then("^a message confirming that a message was send is displayed$")
+    @Then("^a alert message confirming that a new message was send is displayed$")
     public void aMessageConfirmingThatAMessageWasSendIsDisplayed()
     {
         WorkChatPage workChatPage = new WorkChatPage();
         MainPage mainPage = new MainPage();
-        //String actualResult = workChatPage.getMessageSentConfirmationText();
-        String actualResult = mainPage.getErrorMessage();
+        String actualResult = workChatPage.getMessageSentConfirmationText();
+        //String actualResult = mainPage.getErrorMessage();
         String expectedResult = "Message sent";
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @And("^a conversation with the user \"([^\\\"]*)\" is displayed$")
+    @And("^a conversation with the user \"([^\\\"]*)\" is displayed in the Work Chat list$")
     public void aConversationWithTheUserIsDisplayed(String userEmail)
     {
         WorkChatPage workChatPage = new WorkChatPage();
@@ -47,7 +47,7 @@ public class WorkChat {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @Then("^a conversation with the user \"([^\\\"]*)\" is deleted$")
+    @Then("^the conversation with the user \"([^\\\"]*)\" is deleted in the Work Chat list$")
     public void aConversationWithTheUserIsDeleted(String userEmail)
     {
         WorkChatPage workChatPage = new WorkChatPage();
@@ -85,7 +85,7 @@ public class WorkChat {
             System.out.println("No user email conversation was found!! in WorkChat.java");
         }
     }
-    @Given("^I Go to the Work Chat tab$")
+    @Given("^I go to the Work Chat tab$")
     public void iGoToTheWorkChatTab()
     {
         MainPage mainPage = new MainPage();

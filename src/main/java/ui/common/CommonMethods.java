@@ -32,14 +32,14 @@ public class CommonMethods {
                     element, "");
         }
     }
-    public static boolean theAccountIsLogin()
+
+    public static void setAttributeToWebElement(WebElement element,String changes)
     {
         WebDriver driver = DriverManager.getInstance().getWebDriver();
-        if(driver.getCurrentUrl().contains("evernote.com/Home.action"))
-            return true;
-        else
-            return false;
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript(changes,element);
     }
+
     public static void logOut()
     {
         PageTransporter.getInstance().goToMain().logOut();

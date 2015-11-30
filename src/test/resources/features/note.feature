@@ -5,25 +5,25 @@ Feature: Note
     Given Im logged in with the user "testautomated91@gmail.com" and the password "Client123"
 
   @createNotebook
-  Scenario: I can create a note inside a notebook
-    Given I create a noteBook "First Notebook"
-    When I create a note "My note" for notebook "First Notebook"
-    Then the note "My note" is in the note list of "First Notebook" notebook
+  Scenario: I can create a Note inside a Notebook
+    Given I create a NoteBook "First Notebook"
+    When I create a Note "My note" for Notebook "First Notebook"
+    Then the Note "My note" is in the Note list of "First Notebook" Notebook
 
   @createNotebook
-  Scenario: I can delete a note
-    Given I create a noteBook "Songs to sing"
-      And I create a note "karaoke" for notebook "Songs to sing"
-    When I delete the note "karaoke"
-    Then a message confirming that a note was deleted is displayed
-      And the note "karaoke" is not displayed in the list of notes
+  Scenario: I can delete a Note
+    Given I create a NoteBook "Songs to sing"
+      And I create a Note "karaoke" for Notebook "Songs to sing"
+    When I delete the Note "karaoke"
+    Then a message confirming that a Note was deleted is displayed
+      And the Note "karaoke" is not displayed in the list of Notes
 
   @createNotebook
-  Scenario: a note should be showed at the begin of the list when is created in a noteBook with 2 other notes
-    Given I create a noteBook "Automation tasks"
-      And I create a note "first note" for notebook "Automation tasks"
-      And I create a note "second note" for notebook "Automation tasks"
-    When I create a note "last note" for notebook "Automation tasks"
-    Then the note "last note" is in the note list of "Automation tasks" notebook
-    When I sort the list of notes by "Date Created (newest first)"
-    Then the "last note" should be at the beginning of the list of notes
+  Scenario: the newest note should be displayed at the begin of the list of notes when is sorted by "Date Created (newest first)"
+    Given I create a NoteBook "Automation tasks"
+      And I create a Note "first note" for Notebook "Automation tasks"
+      And I create a Note "second note" for Notebook "Automation tasks"
+    When I create a Note "last note" for Notebook "Automation tasks"
+    Then the Note "last note" is in the Note list of "Automation tasks" Notebook
+    When I sort the list of Notes by "Date Created (newest first)"
+    Then the "last note" should be at the beginning of the list of Notes

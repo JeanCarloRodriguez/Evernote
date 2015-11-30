@@ -25,7 +25,7 @@ public class Note {
     {
         mainPage = new MainPage();
     }
-    @When("^I create a note \"([^\\\"]*)\" for notebook \"([^\\\"]*)\"$")
+    @When("^I create a Note \"([^\\\"]*)\" for Notebook \"([^\\\"]*)\"$")
     public void ICreateANote(String noteName,String notebookName)
     {
         leftMenuPage = mainPage.getLeftMenu();
@@ -33,7 +33,7 @@ public class Note {
                 .createNote(noteName,notebookName);
 
     }
-    @Then("^the note \"([^\\\"]*)\" is in the note list of \"([^\\\"]*)\" notebook$")
+    @Then("^the Note \"([^\\\"]*)\" is in the Note list of \"([^\\\"]*)\" Notebook$")
     public void theNoteIsInTheNoteListOfTheNotebook(String noteName,String notebookName)
     {
         notebookPage = new NotebookPage();
@@ -42,13 +42,13 @@ public class Note {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @When("^I delete the note \"([^\\\"]*)\"$")
+    @When("^I delete the Note \"([^\\\"]*)\"$")
     public void iDeleteANoteFromTheNoteList(String noteName)
     {
         mainPage.getLeftMenu().goToNotesPage().goToDeleteNoteConfirmationPage(noteName).confirm();
         name = noteName;
     }
-    @Then("^the note \"([^\\\"]*)\" is not displayed in the list of notes$")
+    @Then("^the Note \"([^\\\"]*)\" is not displayed in the list of Notes$")
     public void theNoteIsNotInTheList(String noteName)
     {
         boolean actualResult = notesPage.theNoteWasDeleted(noteName);
@@ -56,7 +56,7 @@ public class Note {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @Then("^a message confirming that a note was deleted is displayed$")
+    @Then("^a message confirming that a Note was deleted is displayed$")
     public void aMessageConfirmingThatANoteWasDeleted()
     {
         notesPage = new NotesPage();
@@ -65,14 +65,14 @@ public class Note {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @When("^I sort the list of notes by \"([^\\\"]*)\"$")
+    @When("^I sort the list of Notes by \"([^\\\"]*)\"$")
     public void iSortTheListOfNotesBy(String sortBy)
     {
         NotebookPage notebookPage = new NotebookPage();
         notebookPage.chooseSortOption(sortBy);
     }
 
-    @Then("^the \"([^\\\"]*)\" should be at the beginning of the list of notes$")
+    @Then("^the \"([^\\\"]*)\" should be at the beginning of the list of Notes$")
     public void theNewNoteShouldBeAtTheBeginningOfTheList(String noteName)
     {
         NotebookPage notebookPage = new NotebookPage();

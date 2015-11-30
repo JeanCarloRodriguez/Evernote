@@ -83,7 +83,7 @@ public class Login {
     @Given("Im logged in with the user \"([^\\\"]*)\" and the password \"([^\\\"]*)\"")
     public void iLogInWithTheUserAndPassword(String user, String password)
     {
-        if(!CommonMethods.theAccountIsLogin())
+        if(!PageTransporter.theAccountIsLogged())
         {
             PageTransporter.getInstance().goToLogin();
             loginIntoWebPageSuccess(user, password);
@@ -109,7 +109,7 @@ public class Login {
     @Before("@Login")
     public void verifyLogoutUser()
     {
-        if(CommonMethods.theAccountIsLogin())
+        if(PageTransporter.theAccountIsLogged())
         {
             iLogOut();
         }

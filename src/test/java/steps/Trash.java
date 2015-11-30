@@ -13,14 +13,14 @@ import ui.pages.TrashPage;
  */
 public class Trash {
 
-    @When("^I empty all the notes$")
+    @When("^I empty all the Notes$")
     public void iEmptyAllTheNotes()
     {
         TrashPage trashPage = new TrashPage();
         trashPage.emptyAllNotes();
     }
 
-    @Then("^the trash is empty$")
+    @Then("^the Trash is empty$")
     public void theTrashIsEmpty()
     {
         TrashPage trashPage = new TrashPage();
@@ -28,7 +28,7 @@ public class Trash {
         System.out.println("the trash haves: "+trashPage.getNotesCount());
     }
 
-    @And("^the notes count says \"([^\\\"]*)\"$")
+    @And("^the Notes count says \"([^\\\"]*)\"$")
     public void theNotesCountSays(String noteCounts)
     {
         TrashPage trashPage = new TrashPage();

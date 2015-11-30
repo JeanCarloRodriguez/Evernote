@@ -6,6 +6,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import ui.PageTransporter;
 import ui.common.CommonMethods;
 
 @CucumberOptions(
@@ -25,7 +26,7 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
 
     @AfterTest
     public void afterExecution() {
-        if(CommonMethods.theAccountIsLogin())
+        if(PageTransporter.theAccountIsLogged())
         {
             CommonMethods.emptyAllNotes();
             CommonMethods.logOut();

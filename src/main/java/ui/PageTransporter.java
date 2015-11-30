@@ -15,7 +15,7 @@ import ui.pages.RootPage;
  * To change this template use File | Settings | File Templates.
  */
 public class PageTransporter {
-    private WebDriver driver = DriverManager.getInstance().getWebDriver();
+    private static WebDriver driver = DriverManager.getInstance().getWebDriver();
     private static String rootUrl;
     private static String mainUrl;
     private static String loginUrl;
@@ -37,6 +37,13 @@ public class PageTransporter {
         return instance;
     }
 
+    public static boolean theAccountIsLogged()
+    {
+        if(driver.getCurrentUrl().contains(CommonMethods.readJsonFile("loggedUrl")))
+            return true;
+        else
+            return false;
+    }
 
     public RootPage goToRoot()
     {

@@ -12,7 +12,7 @@ import ui.BasePageObject;
  */
 public class ChatPage extends BasePageObject {
 
-    @FindBy(id = "gwt-debug-arrowChatView")
+    @FindBy(id = "gwt-debug-workChatDrawerDrawerSlidingPanel")
     WebElement chatView;
 
     @FindBy(id = "gwt-debug-MessageRecipients-editContainer")

@@ -25,7 +25,7 @@ public class Notebook {
         mainPage = new MainPage();
     }
 
-    @Given("I create a noteBook \"([^\\\"]*)\"")
+    @Given("I create a NoteBook \"([^\\\"]*)\"")
     public void ICreateANoteBook(String noteName)
     {
         //Todo
@@ -74,7 +74,7 @@ public class Notebook {
         Assert.assertEquals(actualResult,expectedResult);
     }
 
-    @When("^I go to trash page$")
+    @When("^I go to Trash page$")
     public void iGoToTrashPage()
     {
         mainPage.getLeftMenu()
