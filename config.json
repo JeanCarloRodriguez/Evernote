@@ -1,0 +1,9 @@
+{
+    "implicitWait" : "10",
+    "explicitWait" : "20",
+    "rootUrl":"https://www.evernote.com/",
+    "loginUrl" : "https://www.evernote.com/Login.action",
+    "mainUrl" : "https://www.evernote.com/Home.action",
+    "loggedUrl" : "evernote.com/Home.action",
+    "NumberOfTriesForElementDeleted" : "10"
+}
