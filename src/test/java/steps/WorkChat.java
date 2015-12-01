@@ -32,8 +32,8 @@ public class WorkChat {
     {
         WorkChatPage workChatPage = new WorkChatPage();
         MainPage mainPage = new MainPage();
-        String actualResult = workChatPage.getMessageSentConfirmationText();
-        //String actualResult = mainPage.getErrorMessage();
+        //String actualResult = workChatPage.getMessageSentConfirmationText();
+        String actualResult = mainPage.getErrorMessage();
         String expectedResult = "Message sent";
         Assert.assertEquals(actualResult,expectedResult);
     }
