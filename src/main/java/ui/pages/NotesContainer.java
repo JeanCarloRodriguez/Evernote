@@ -59,8 +59,9 @@ public abstract class NotesContainer extends BasePageObject {
         }
         return "";
     }
-    public boolean isNoteExist(String notebookName)
+    public boolean isNoteExist(String noteName)
     {
-        return isPresent(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+notebookName+"']"));
+        return isPresent(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']"));
     }
+
 }

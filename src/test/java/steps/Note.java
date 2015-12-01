@@ -1,12 +1,10 @@
 package steps;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
-import ui.pages.LeftMenuPage;
-import ui.pages.MainPage;
-import ui.pages.NotebookPage;
-import ui.pages.NotesPage;
+import ui.pages.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +29,7 @@ public class Note {
         leftMenuPage = mainPage.getLeftMenu();
         leftMenuPage.goToNewNotePage()
                 .createNote(noteName,notebookName);
-
+        name= noteName;
     }
     @Then("^the Note \"([^\\\"]*)\" is in the Note list of \"([^\\\"]*)\" Notebook$")
     public void theNoteIsInTheNoteListOfTheNotebook(String noteName,String notebookName)
@@ -79,6 +77,43 @@ public class Note {
         String actualResult = notebookPage.getFirstNote();
         String expectedResult = noteName;
         Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @When("^I add the note to the shortcut list$")
+    public void iAddTheNoteToTheShortcutList()
+    {
+        NotesPage notesPage = new NotesPage();
+        notesPage.addShortcut(name);
+    }
+
+    @Then("^the note is in the shortcut list$")
+    public void theNoteISInTheShortcutList()
+    {
+        ShortcutPage shortcutPage = mainPage.getLeftMenu().goToShortcutPage();
+        boolean actualResult = shortcutPage.isShortcutPresent(name);
+        boolean expectedResult = true;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+
+    @When("^I remove the shortcut from the shortcuts list$")
+    public void iRemoveTheShortcutFromTheShortcutsList()
+    {
+        ShortcutPage shortcutPage = mainPage.getLeftMenu().goToShortcutPage();
+        shortcutPage.removeShortcut(name);
+    }
+
+    @Then("^the note is not in the shortcut list$")
+    public void theNoteIsNotInTheShortcutList()
+    {
+        ShortcutPage shortcutPage = new ShortcutPage();
+        boolean actualResult = shortcutPage.isShortcutDeleted(name);
+        boolean expectedResult = true;
+        Assert.assertEquals(actualResult,expectedResult);
+    }
+    @After("@addShortcut")
+    public void addShortcut()
+    {
+        iRemoveTheShortcutFromTheShortcutsList();
     }
 
 }

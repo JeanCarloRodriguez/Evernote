@@ -48,5 +48,11 @@ public class NotesPage extends NotesContainer {
         WebElement deleteMessage = driver.findElement(By.xpath("//div[@class='gwt-HTML'][contains(text(),'moved to')]"));
         return deleteMessage.getText();
     }
-
+    public NotesContainer addShortcut(String noteName)
+    {
+        WebElement shortcutButton =  driver.findElement(By.xpath("//div[@class = 'NotesView-ScrollWindow']//div[text() = '"+noteName+"']//parent::div//following-sibling::div//div[contains(@class,'qa-shortcutButton')]"));
+        shortcutButton.click();
+        System.out.println("is shortcut active active? "+shortcutButton.getAttribute("class"));
+        return this;
+    }
 }
